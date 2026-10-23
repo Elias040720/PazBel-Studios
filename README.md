@@ -1,63 +1,98 @@
-# PazBel Studios
+# PazBel Studios 2.0 — Experiencia Inmersiva & Arquitectura Digital
 
-Landing corporativa en español peruano, construida con HTML, CSS y JavaScript. Sin instalación de paquetes, backend ni proceso de compilación.
+> **Diseño que impacta. Ingeniería que funciona.**  
+> Estudio peruano de desarrollo web, ingeniería de software y marketing digital fundado por Elías y Abel.
 
-## Abrir el proyecto
+---
 
-Desde esta carpeta, ejecuta `node server.cjs` y abre http://127.0.0.1:4173. Requiere Node.js. Para detener el servidor, Ctrl+C. También puedes abrir `index.html` directamente; el servidor es preferible para portapapeles y pruebas.
+## 🌟 Visión General
 
-## Archivos
+**PazBel Studios 2.0** es la evolución y rediseño integral de la plataforma corporativa de PazBel Studios. Migrada desde una versión estática a una arquitectura moderna basada en **React 19, TypeScript, Vite 6, Three.js (React Three Fiber) y animaciones de precisión GSAP (ScrollTrigger + `@gsap/react`)**.
 
-- `index.html`: estructura, contenido editorial, metadatos y diálogo de contacto.
-- `css/styles.css`: sistema visual, seis rangos adaptables y movimiento reducido.
-- `js/config.js`: teléfono, marca, redes, precios, suscripciones, proyectos, estados y condiciones comerciales.
-- `js/main.js`: cotizador, demos, contactos contextuales, navegación, FAQ y animaciones.
-- `assets/logo/pazbel-original.jpeg`: imagen oficial original, sin redibujar. El recorte del monograma en navegación se hace con CSS; el logo completo aparece al final.
-- `assets/fonts/`: Inter y Space Grotesk en WOFF2 local, siete pesos, licencias OFL.
-- `assets/vendor/`: GSAP 3.13.0 y ScrollTrigger 3.13.0 locales, con cabeceras de licencia conservadas.
-- `BENCHMARK.md`: fuentes y decisiones que informan el diseño.
-- `qa.html`: banco de pruebas reproducible en navegador, sin paquetes externos.
-- `tests/`: resultados y capturas de revisión.
-- `TESTS.md`: metodología y límites de la verificación.
+La plataforma implementa la dirección visual **Chromatic Engineering**:
+- **Monograma PB 3D**: Escultura tridimensional en tiempo real con materiales PBR iridiscentes derivados del logotipo oficial (espectro cian, azul, violeta, magenta y coral).
+- **Arquitectura Double-Bezel**: Bisel exterior translúcido con micro-halo y núcleo interior concéntrico mathematically aligned.
+- **Scrollytelling Cinematográfico**: Navegación fluida por 11 capítulos independientes con identificadores estables y persistencia de scroll.
+- **Cotizador Dinámico**: Cálculo transparente y reactivo con desglose de inversión inicial y continuidad mensual, enlazado directamente a WhatsApp.
+- **Ecosistema Multi-Agente & 41 Skills**: Gobernanza por agentes autónomos (`@tech-lead`, `@ui-expert`, `@arch`, `@sec`, `@code-reviewer`) potenciados por UI/UX Pro Max, Emil Kowalski Design Engineering, Impeccable Style y Awesome Standards.
 
-## Configurar WhatsApp y redes
+---
 
-En `js/config.js`, asigna `whatsapp` al número oficial completo con código internacional, sin espacios, por ejemplo código de país + número real. El valor vacío es intencional. No uses un número ficticio en producción.
+## 🚀 Stack Tecnológico
 
-Con el número vacío o inválido, los botones abren un diálogo que explica la configuración pendiente y muestra el mensaje para copiarlo. Con número válido abren `https://wa.me/` con `encodeURIComponent`, `noopener` y `noreferrer`. El sitio no envía mensajes automáticamente: la persona confirma el envío dentro de WhatsApp.
+| Capa | Tecnologías |
+|---|---|
+| **Core Frontend** | React 19.3, TypeScript 5.8, Vite 6.4 |
+| **Gráficos 3D & WebGL** | Three.js 0.180, `@react-three/fiber` 9.8, `@react-three/drei` 10.7 |
+| **Animación & Motion** | GSAP 3.15, ScrollTrigger, `@gsap/react` 2.1 |
+| **Tipografía** | Archivo Variable (Display), Instrument Serif Italic (Editorial), Space Grotesk & Inter (Body/Mono) |
+| **Estilos & Tokens** | CSS Modules / Modern Vanilla CSS con tokens atómicos OLED |
+| **Gobernanza & AST** | GitNexus Code Intelligence, Archify Interactive Architecture |
+| **QA & Testing** | Playwright E2E Test Suite |
 
-Para redes, agrega objetos `{ name: 'Instagram', url: 'https://…' }` en `socials` con enlaces oficiales verificados. No se muestran enlaces inventados. Actualiza el nombre de marca en la configuración y, si cambia la identidad, en el título, logotipo y contenido editorial de `index.html`.
+---
 
-## Editar precios y proyectos
+## 🎭 Estructura de Capítulos (Landing por Escenas)
 
-Los cuatro precios iniciales y tres mensualidades están centralizados en `plans` y `subscriptions`. Las tarjetas, FAQ relacionadas, opciones, importes y mensajes se generan desde esos datos. `from: true` conserva la distinción entre precio fijo y precio de entrada referencial. No se suman pagos únicos y mensuales en un total ambiguo.
+1. **ESCENA 01 — HERO 3D (`#inicio`)**: Monograma tridimensional interactivo con cursor, titular monumental y CTAs de conversión.
+2. **ESCENA 02 — NUESTRA PROPUESTA (`#enfoque`)**: Diferenciación de marca ("Estar en internet no es lo mismo que destacar").
+3. **ESCENA 03 — SERVICIOS (`#servicios`)**: Bento grid interactivo con las 5 especialidades digitales.
+4. **ESCENA 04 — PROCESO (`#proceso`)**: Scrollytelling interactivo en 3 etapas (*Diseñamos*, *Desarrollamos*, *Impulsamos*) + sección del equipo (Elías y Abel).
+5. **ESCENA 05 — PORTAFOLIO INMERSIVO (`#proyectos`)**: Presentación destacada con mockups conceptuales de alta fidelidad para **MOVA** (EdTech), **Chambi Motors** (Automotriz) y **CarWashAlita** (Gestión).
+6. **ESCENA 06 — DEMOSTRACIÓN POR RUBRO (`#demo`)**: Selector interactivo para Restaurante, Taller, Moda y Consultoría.
+7. **ESCENA 07 — PRECIOS CLAROS (`#precios`)**: Planes comerciales transparentes (Landing Pro S/89, Corporativa S/499, E-commerce S/1,200, Software a medida desde S/1,890).
+8. **ESCENA 08 — CONTINUIDAD & SUSCRIPCIONES (`#marketing`)**: Acompañamiento mensual independiente (Mantenimiento S/89/mes, Tracción S/349/mes, Growth S/690/mes).
+9. **ESCENA 09 — COTIZADOR DINÁMICO (`#cotizador`)**: Selector interactivo con cálculo automático de pago inicial vs mensual y generación de mensaje estructurado a WhatsApp.
+10. **ESCENA 10 — PREGUNTAS FRECUENTES (`#faq`)**: Acordeón interactivo con 8 respuestas transparentes sobre hosting, alcance y tiempos.
+11. **ESCENA 11 — CIERRE CINEMATOGRÁFICO (`#contacto`)**: Conclusión editorial con botón directo a WhatsApp oficial y pie de página completo.
 
-Cada proyecto tiene nombre, categoría, descripción, tecnologías, estado y CTA. Las vistas actuales son HTML/SVG conceptuales rotuladas. MOVA y Chambi se contrastaron con documentación/código local, sin modificar esos repositorios. No se verificaron despliegues. La documentación local de MOVA indica Railway, diferente del Azure citado en el brief; por ello se omite el proveedor activo. CARWASHALITA requiere confirmar estado y funcionalidades.
+---
 
-## Dirección creativa
+## 📦 Instalación y Ejecución Local
 
-“Del primer píxel a tu próxima oportunidad”: composición editorial oscura, Space Grotesk + Inter, cinta cian/violeta/coral derivada del lenguaje del logo. El hero presenta una interfaz, la narrativa conecta diseño, operación y crecimiento; el portafolio usa apilamiento en escritorio y tarjetas normales en móvil. Las cuatro demos cambian marca ficticia, colores, composición gráfica, titular y CTA de ejemplo. No usan IA ni APIs.
+### Prerrequisitos
+- Node.js `>= 20.11`
+- npm o pnpm
 
-Los recursos críticos se sirven localmente. Si GSAP no carga, siguen disponibles navegación, precios, demos, cotizador y contactos; la narrativa conserva su contenido y actualización con IntersectionObserver. La preferencia de movimiento reducido desactiva animaciones, fijación y scroll suave. No hay medición publicitaria ni formularios que guarden datos.
+### Pasos
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/Elias040720/PazBel-Studios.git
+cd PazBel-Studios
 
-## Antes de publicar
+# 2. Instalar dependencias
+npm install
 
-1. Número oficial de WhatsApp y enlaces de redes.
-2. Dominio y alojamiento finales; añadir URL canónica, `og:url`, imagen social absoluta y sitemap cuando exista el dominio real.
-3. Confirmación fiscal de IGV.
-4. Alcance contractual de Landing Page Pro: secciones, contenido y revisiones; número de productos/integraciones de tienda; límites de soporte y condiciones de hosting.
-5. Estados públicos, URLs autorizadas y capturas reales de los tres proyectos. Sustituir demostraciones solo con evidencia disponible.
-6. Condiciones comerciales, identificación legal y textos aplicables revisados por el negocio; no se inventan políticas, plazos ni direcciones.
+# 3. Iniciar el servidor de desarrollo
+npm run dev
 
-Esta entrega es local y no ha sido publicada. Para alojamiento estático, subir `index.html`, `css/`, `js/` y `assets/`. No subir `qa.html`, `server.cjs`, documentos ni `tests/` como páginas comerciales. No hay credenciales ni backend que configurar.
+# 4. Verificar compilación de tipos
+npm run typecheck
 
-## Repetir las pruebas
+# 5. Generar bundle de producción
+npm run build
+```
 
-Con el servidor activo, abre http://127.0.0.1:4173/qa.html y pulsa “Ejecutar pruebas”. El banco abre el sitio en un marco real a cada ancho; valida importes, mensajes y estados. El selector “Ver” permite inspeccionar secciones a 375, 430, 768, 1024, 1440 y 1920 px. El escenario de movimiento reducido simula la consulta de medios de JavaScript y activa las mismas reglas CSS dentro del marco; no cambia preferencias del sistema.
+El servidor local se iniciará en `http://localhost:5173/`.
 
-## Recursos y licencias
+---
 
-- Logo: proporcionado por el usuario.
-- Inter y Space Grotesk: paquetes `@fontsource/inter@5.3.0` y `@fontsource/space-grotesk@5.3.0`, archivos latinos WOFF2. Licencias junto a las fuentes.
-- GSAP/ScrollTrigger 3.13.0: https://gsap.com/standard-license/ y https://gsap.com/docs/v3/Plugins/ScrollTrigger/.
-- Ilustraciones de cinta, automóvil y mockups: código SVG/CSS/HTML creado para esta landing. No representan capturas ni resultados de clientes.
+## 🏛️ Gobernanza y Skills de IA
+
+El repositorio cuenta con una carpeta `.agents/` configurada para **Antigravity IDE**, **Claude Code** y otros motores de IA:
+- **[.agents/skills/](file:///.agents/skills/)**: 41 skills instaladas (UI/UX Pro Max, Emil Kowalski, Impeccable, GSAP, Three.js, Everything-Claude-Code).
+- **[.agents/rules/](file:///.agents/rules/)**: Reglas estrictas de inmutabilidad, cero CLS, contraste WCAG AA, y principios de código limpio.
+- **[GUIA_DE_INDICACIONES.md](file:///GUIA_DE_INDICACIONES.md)**: Manual del framework P-A-C-E para dar instrucciones de alto rendimiento a los agentes de IA.
+
+---
+
+## 📞 Contacto y Canales Oficiales
+
+- **WhatsApp Oficial**: [+51 916 666 934](https://wa.me/51916666934)
+- **Ubicación**: Perú
+- **Fundadores**: Elías y Abel
+- **Repositorio Oficial**: [github.com/Elias040720/PazBel-Studios](https://github.com/Elias040720/PazBel-Studios)
+
+---
+
+*Desarrollado con dedicación y excelencia técnica por PazBel Studios.*

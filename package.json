@@ -1,0 +1,41 @@
+{
+  "name": "pazbel-studios",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "description": "PazBel Studios 2.0 — experiencia inmersiva en React, Three.js y GSAP.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "typecheck": "tsc -b --pretty",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "legacy": "node legacy/server.cjs"
+  },
+  "engines": {
+    "node": ">=20.11"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@gsap/react": "^2.1.2",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "gsap": "^3.15.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router": "^7.18.4",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^20.19.43",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.180.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "typescript": "5.8",
+    "vite": "^6.4.5"
+  }
+}

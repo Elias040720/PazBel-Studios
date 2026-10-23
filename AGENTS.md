@@ -1,38 +1,33 @@
 <!-- gitnexus:start -->
-# GitNexus & Governance Rules — Antigravity IDE (v2)
+# GitNexus — Code Intelligence
 
-Este proyecto está indexado y protegido por **GitNexus (Code Intelligence)** y **Archify (Interactive Architecture)**.
+This project is indexed by GitNexus as **prueba** (416 symbols, 735 relationships, 13 execution flows).
 
-## Reglas Obligatorias (ALWAYS DO)
+> Index stale? Run `node .gitnexus/run.cjs analyze --index-only` from the project root — it auto-selects an available runner. No `.gitnexus/run.cjs` yet? Bootstrap with `npx`, `bunx`, or `pnpm dlx` — e.g. `bunx gitnexus@latest analyze` (npm 11 npx crash; #1939).
 
-1. **MUST run impact before editing:**
-   Antes de editar cualquier función, clase, entidad o contrato central, DEBES verificar su radio de impacto:
-   `pnpm dlx gitnexus@latest impact "<NombreDelSimbolo>" --direction upstream --repo .`
-   Reportar llamadores detectados y nivel de riesgo. Prohibido reemplazar el análisis de grafo por un simple grep.
+## Always Do
 
-2. **MUST analyze graph changes before committing:**
-   Antes de dar por concluida una tarea o realizar commit:
-   `pnpm dlx gitnexus@latest detect-changes --scope all --repo .`
+- **MUST run impact before editing.** Use `impact({target: "symbolName", direction: "upstream"})` or `node .gitnexus/run.cjs impact "symbolName" --direction upstream --repo .`; report callers, processes, and risk. Never substitute grep for graph analysis.
+- **MUST analyze graph changes before committing.** Use `detect_changes({scope: "all"})` (MCP) or `node .gitnexus/run.cjs detect-changes --scope all --repo .` (CLI fallback). `partial: true` or `truncated: true` is not a clean check — a zero means unseen, not unaffected; re-run it. For regression review: `detect_changes({scope: "compare", base_ref: "main"})` or `node .gitnexus/run.cjs detect-changes --scope compare --base-ref "main" --repo .`.
+- MUST warn on HIGH/CRITICAL `risk` pre-edit; never use `riskSharedAxes` to waive a HIGH/CRITICAL `risk` warning. Compare File/symbol: MCP File omits axes; Graph-RAG expands File.
+- **MUST treat `risk: UNKNOWN` as unresolved, not as low.** An empty caller set is not evidence the symbol is unused — it can also mean the callers are not resolvable by the index (plain-object property access, dynamic dispatch, cross-language calls). `impact` pairs `UNKNOWN` with a `riskNote` saying so. Confirm with a text search before treating the symbol as safe to change or delete; do not proceed on the strength of a zero.
+- **MUST use `query({search_query: "concept"})` for concepts/flows, `context({name: "symbolName"})` for a named symbol, or `impact` for blast radius, on read-only callers, dependencies, imports, or execution flow.** Graph first; text search only for empty/`UNKNOWN`/literals.
+- For security review, `explain({target: "fileOrSymbol"})` lists taint findings (source→sink flows; needs `analyze --pdg`).
 
-3. **MUST warn on HIGH/CRITICAL risk:**
-   Si el análisis de impacto o el diff arroja riesgo ALTO o CRÍTICO, advertir inmediatamente al usuario con la estrategia de mitigación.
+## Never Do
 
-4. **MUST use CAHP protocol on handovers:**
-   Todo reporte de traspaso entre especialistas DEBE incluir el bloque canónico:
-   ```text
-   [CAMBIÓ]: <archivos modificados>
-   [AFECTA]: <componentes impactados>
-   [RIESGO]: bajo | medio | alto | crítico
-   [SIGUIENTE]: <@agente>
-   ```
+- NEVER edit a function, class, or method before MCP/CLI impact analysis.
+- NEVER ignore HIGH or CRITICAL risk warnings from impact analysis, and never read `UNKNOWN` as an all-clear — it means the walk could not answer, which is the one verdict that requires confirming by other means.
+- NEVER rename symbols with find-and-replace — use `rename` which understands the call graph.
+- NEVER commit before MCP/CLI graph change analysis.
 
-5. **MUST ensure zero-error builds:**
-   Prohibido declarar `STATUS: APPROVED 🟢` si existen errores de compilación, de types o linters pendientes.
+## Resources
 
-## Reglas Prohibidas (NEVER DO)
+| Resource | Use for |
+| --- | --- |
+| `gitnexus://repo/prueba/context` | Codebase overview, check index freshness |
+| `gitnexus://repo/prueba/clusters` | All functional areas |
+| `gitnexus://repo/prueba/processes` | All execution flows |
+| `gitnexus://repo/prueba/process/{name}` | Step-by-step execution trace |
 
-- ❌ **NEVER** editar un contrato de API o entidad de dominio sin previo análisis de impacto en GitNexus.
-- ❌ **NEVER** usar buscar-y-reemplazar masivo en código fuente sin comprender el grafo de llamadas.
-- ❌ **NEVER** incluir secretos, credenciales o claves API en archivos rastreados por Git.
-- ❌ **NEVER** dar por terminada una tarea dejando instrucciones manuales no ejecutadas para el usuario.
 <!-- gitnexus:end -->

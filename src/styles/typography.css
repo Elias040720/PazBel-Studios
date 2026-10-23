@@ -1,0 +1,73 @@
+@import '@fontsource-variable/archivo';
+@import '@fontsource/instrument-serif/latin-400-italic.css';
+
+:root {
+  --font-display: 'Archivo Variable', 'Space Grotesk', -apple-system, sans-serif;
+  --font-editorial: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: -0.04em;
+  margin: 0;
+  line-height: 1.05;
+}
+
+h1 {
+  font-size: clamp(48px, 6.8vw, 102px);
+  letter-spacing: -0.06em;
+  line-height: 1.02;
+}
+
+h2 {
+  font-size: clamp(34px, 4.4vw, 68px);
+  letter-spacing: -0.05em;
+  line-height: 1.06;
+}
+
+h3 {
+  font-size: clamp(24px, 2.6vw, 36px);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+p {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Editorial italic accent */
+em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  background: var(--gradient-pb-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  padding-right: 0.08em;
+}
+
+/* Micro metadata / Eyebrows */
+.eyebrow, .badge-meta, .section-counter {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}

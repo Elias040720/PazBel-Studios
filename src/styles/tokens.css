@@ -1,0 +1,54 @@
+:root {
+  /* Surfaces & Backgrounds */
+  --color-bg-base: #07090e;
+  --color-bg-surface: #0d111a;
+  --color-bg-card: #131826;
+  --color-bg-card-hover: #192033;
+  --color-bg-elevated: #1a2033;
+  --color-bg-glass: rgba(14, 18, 28, 0.75);
+
+  /* Lines & Borders */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-medium: rgba(255, 255, 255, 0.16);
+  --color-border-bright: rgba(255, 255, 255, 0.32);
+  --color-border-focus: #00dfff;
+
+  /* Chromatic PB Accent Spectrum */
+  --color-cyan: #00dfff;
+  --color-blue: #397cff;
+  --color-violet: #8b4dff;
+  --color-magenta: #e74bbd;
+  --color-coral: #ff647b;
+
+  /* Chromatic Gradients */
+  --gradient-pb-spectrum: linear-gradient(135deg, #00dfff 0%, #397cff 28%, #8b4dff 58%, #e74bbd 82%, #ff647b 100%);
+  --gradient-pb-text: linear-gradient(105deg, #7ce1fc 0%, #b5a5ff 55%, #ffa3b5 100%);
+  --gradient-glow: radial-gradient(circle at 50% 50%, rgba(139, 77, 255, 0.18) 0%, transparent 70%);
+
+  /* Typography Colors */
+  --color-text-primary: #f6f7fb;
+  --color-text-secondary: #a6adbd;
+  --color-text-muted: #737b8e;
+
+  /* Emil Kowalski Motion Easing Curves */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Durations */
+  --duration-instant: 120ms;
+  --duration-snappy: 180ms;
+  --duration-normal: 260ms;
+  --duration-scenic: 600ms;
+
+  /* Double-Bezel Radii */
+  --radius-outer-lg: 28px;
+  --radius-inner-lg: 20px;
+  --radius-outer-md: 20px;
+  --radius-inner-md: 14px;
+  --radius-pill: 9999px;
+
+  /* Layout Container */
+  --max-width-content: 1680px;
+}
