@@ -1,0 +1,97 @@
+PASS 375 normal: sin desbordamiento
+PASS 375: contenido dentro del ancho
+PASS 375: planes, proyectos y FAQ
+PASS 375: anclas válidas
+PASS 375: 16 combinaciones de presupuesto
+PASS 375: 16 mensajes contextuales
+PASS 375: cuatro rubros y sus mensajes
+PASS 375: número ausente no genera enlace
+PASS 375: codificación WhatsApp
+PASS 375: menú abre
+PASS 375: menú cierra al navegar
+PASS 375: FAQ abre
+PASS 430 normal: sin desbordamiento
+PASS 430: contenido dentro del ancho
+PASS 430: planes, proyectos y FAQ
+PASS 430: anclas válidas
+PASS 430: 16 combinaciones de presupuesto
+PASS 430: 16 mensajes contextuales
+PASS 430: cuatro rubros y sus mensajes
+PASS 430: número ausente no genera enlace
+PASS 430: codificación WhatsApp
+PASS 430: menú abre
+PASS 430: menú cierra al navegar
+PASS 430: FAQ abre
+PASS 768 normal: sin desbordamiento
+PASS 768: contenido dentro del ancho
+PASS 768: planes, proyectos y FAQ
+PASS 768: anclas válidas
+PASS 768: 16 combinaciones de presupuesto
+PASS 768: 16 mensajes contextuales
+PASS 768: cuatro rubros y sus mensajes
+PASS 768: número ausente no genera enlace
+PASS 768: codificación WhatsApp
+PASS 768: menú abre
+PASS 768: menú cierra al navegar
+PASS 768: FAQ abre
+PASS 1024 normal: sin desbordamiento
+PASS 1024: contenido dentro del ancho
+PASS 1024: planes, proyectos y FAQ
+PASS 1024: anclas válidas
+PASS 1024: 16 combinaciones de presupuesto
+PASS 1024: 16 mensajes contextuales
+PASS 1024: cuatro rubros y sus mensajes
+PASS 1024: número ausente no genera enlace
+PASS 1024: codificación WhatsApp
+PASS 1024: FAQ abre
+PASS 1024: ScrollTrigger activo
+PASS 1024: capítulo 3 ligado al scroll
+PASS 1440 normal: sin desbordamiento
+PASS 1440: contenido dentro del ancho
+PASS 1440: planes, proyectos y FAQ
+PASS 1440: anclas válidas
+PASS 1440: 16 combinaciones de presupuesto
+PASS 1440: 16 mensajes contextuales
+PASS 1440: cuatro rubros y sus mensajes
+PASS 1440: número ausente no genera enlace
+PASS 1440: codificación WhatsApp
+PASS 1440: FAQ abre
+PASS 1440: ScrollTrigger activo
+PASS 1440: capítulo 3 ligado al scroll
+PASS 1920 normal: sin desbordamiento
+PASS 1920: contenido dentro del ancho
+PASS 1920: planes, proyectos y FAQ
+PASS 1920: anclas válidas
+PASS 1920: 16 combinaciones de presupuesto
+PASS 1920: 16 mensajes contextuales
+PASS 1920: cuatro rubros y sus mensajes
+PASS 1920: número ausente no genera enlace
+PASS 1920: codificación WhatsApp
+PASS 1920: FAQ abre
+PASS 1920: ScrollTrigger activo
+PASS 1920: capítulo 3 ligado al scroll
+PASS 1440 no-libraries: sin desbordamiento
+PASS 1440: contenido dentro del ancho
+PASS 1440: planes, proyectos y FAQ
+PASS 1440: anclas válidas
+PASS 1440: 16 combinaciones de presupuesto
+PASS 1440: 16 mensajes contextuales
+PASS 1440: cuatro rubros y sus mensajes
+PASS 1440: número ausente no genera enlace
+PASS 1440: codificación WhatsApp
+PASS 1440: FAQ abre
+PASS 1440: fallback sin GSAP
+PASS 1440 reduced: sin desbordamiento
+PASS 1440: contenido dentro del ancho
+PASS 1440: planes, proyectos y FAQ
+PASS 1440: anclas válidas
+PASS 1440: 16 combinaciones de presupuesto
+PASS 1440: 16 mensajes contextuales
+PASS 1440: cuatro rubros y sus mensajes
+PASS 1440: número ausente no genera enlace
+PASS 1440: codificación WhatsApp
+PASS 1440: FAQ abre
+PASS 1440: movimiento reducido sin ScrollTriggers
+PASS 1440: movimiento reducido sin sticky ni scroll suave
+PASS Sin errores JavaScript durante la prueba
+RESULTADO: 96/96 verificaciones correctas.
