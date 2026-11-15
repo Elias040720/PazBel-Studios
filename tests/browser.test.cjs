@@ -126,15 +126,19 @@ test('service list and six service detail routes render, including rapid routing
   }
   await page.goto(`${entry}#/`);
   await page.locator('.nav__links a[href="#/proyectos"]').click();
+  await page.waitForFunction(() => location.hash === '#/proyectos');
   await page.waitForTimeout(80);
   await page.locator('.nav__links a[href="#/servicios"]').click();
-  await page.waitForTimeout(1500);
+  await page.waitForFunction(() => location.hash === '#/servicios');
+  await page.waitForTimeout(1050);
   assert.equal(await page.locator('#view-servicios').isVisible(), true, 'rapid navigation settles at the latest route');
   await page.goBack();
-  await page.waitForTimeout(1000);
+  await page.waitForFunction(() => location.hash === '#/proyectos');
+  await page.waitForTimeout(1050);
   assert.equal(await page.locator('#view-proyectos').isVisible(), true, 'back returns to previous hash route');
   await page.goForward();
-  await page.waitForTimeout(1000);
+  await page.waitForFunction(() => location.hash === '#/servicios');
+  await page.waitForTimeout(1050);
   assert.equal(await page.locator('#view-servicios').isVisible(), true, 'forward restores next hash route');
   assert.deepEqual(errors, []);
   await page.close();
