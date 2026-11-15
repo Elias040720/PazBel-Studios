@@ -1,0 +1,1 @@
+Las capturas de este directorio se descargan al ejecutar PREPARAR_FOTOS.cmd. Alternativamente, el sitio intenta mostrar las imagenes publicadas en el GitHub del portafolio. Las capturas de 2 proyectos verificados ya estan en assets/portfolio.

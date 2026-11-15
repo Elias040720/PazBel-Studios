@@ -1,26 +1,1054 @@
-<!doctype html>
-<html lang="es-PE">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>PazBel Studios — Diseño que impacta. Ingeniería que funciona.</title>
-    <meta
-      name="description"
-      content="Estudio peruano de desarrollo web, software a medida y marketing digital. Experiencias inmersivas, Three.js, GSAP y presupuesto transparente en soles."
-    />
-    <meta name="theme-color" content="#07090e" />
-    <meta property="og:title" content="PazBel Studios — Del primer píxel a tu próxima oportunidad" />
-    <meta
-      property="og:description"
-      content="Diseño, desarrollo y crecimiento digital para tu negocio. Conoce nuestros servicios y arma tu proyecto."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="es_PE" />
-    <link rel="icon" type="image/jpeg" href="/brand/pazbel-original.jpeg" />
-    <link rel="stylesheet" href="/fonts/local.css" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#08090D" />
+<link rel="icon" type="image/webp" href="assets/brand/pb-cutout.webp" />
+<meta property="og:title" content="PazBel Studios — Diseño extraordinario e ingeniería digital" />
+<meta property="og:description" content="Diseño, tecnología y experiencias digitales para hacer avanzar tu negocio." />
+<meta name="color-scheme" content="dark" />
+<title>PazBel Studios — Diseño extraordinario e ingeniería digital</title>
+<meta name="description" content="PazBel Studios. Diseño extraordinario, ingeniería sólida. Sitios corporativos, e-commerce, software a medida y experiencias digitales." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Cursor -->
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__ring"></div>
+  <div class="cursor__dot"></div>
+</div>
+
+<!-- Velo de transición -->
+<div class="veil" id="veil" aria-hidden="true"><span class="veil__word">PazBel</span></div>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#/" class="brand" aria-label="PazBel Studios — Inicio">
+      <span class="brand__mark brand__mark--official" aria-hidden="true"><img src="assets/brand/pb-cutout.webp" alt="" width="36" height="36"></span>
+      <span class="brand__name">PazBel <i>Studios</i></span>
+    </a>
+    <nav class="nav__links" aria-label="Navegación principal">
+      <a href="#/proyectos">Proyectos</a>
+      <a href="#/servicios">Servicios</a>
+      <a href="#/estudio">Estudio</a>
+      <a href="#/proceso">Proceso</a>
+      <a href="#/precios">Inversión</a>
+    </nav>
+    <div class="nav__actions">
+      <a href="#/contacto" class="btn btn--sm magnetic"><span>Hablemos</span></a>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Menú móvil -->
+<div class="menu" id="menu" aria-hidden="true">
+  <nav class="menu__list" aria-label="Menú móvil">
+    <a href="#/" style="transition-delay:.06s"><span>01</span>Inicio</a>
+    <a href="#/proyectos" style="transition-delay:.11s"><span>02</span>Proyectos</a>
+    <a href="#/servicios" style="transition-delay:.16s"><span>03</span>Servicios</a>
+    <a href="#/estudio" style="transition-delay:.21s"><span>04</span>Estudio</a>
+    <a href="#/proceso" style="transition-delay:.26s"><span>05</span>Proceso</a>
+    <a href="#/precios" style="transition-delay:.31s"><span>06</span>Inversión</a>
+    <a href="#/cotizar" style="transition-delay:.36s"><span>07</span>Cotizador</a>
+    <a href="#/contacto" style="transition-delay:.41s"><span>08</span>Contacto</a>
+  </nav>
+  <div class="menu__foot">
+    <div class="rule"></div>
+    <p class="eyebrow">Estudio creativo &amp; ingeniería digital</p>
+  </div>
+</div>
+
+<!-- ===================== MAIN ===================== -->
+<main id="main">
+
+<!-- ============================================================
+     VIEW: HOME
+     ============================================================ -->
+<section class="view" data-view="home" id="view-home">
+
+  <!-- HERO -->
+  <div class="hero" id="hero">
+    <canvas class="hero__canvas field" data-field data-density="1" aria-hidden="true"></canvas>
+    <div class="hero__glow" id="heroGlow" aria-hidden="true"></div>
+    <div class="hero__vignette" aria-hidden="true"></div>
+
+    <div class="hero__inner container">
+      <h1 class="hero__title">
+        <span class="hero__word" data-letters aria-label="PazBel">PAZBEL</span>
+        <span class="hero__sub" aria-hidden="true"><i></i>Studios<i></i></span>
+      </h1>
+
+      <p class="hero__tagline">
+        <span>Diseño extraordinario.</span>
+        <span>Ingeniería sólida.</span>
+        <span class="hero__line--accent">Experiencias que no se olvidan.</span>
+      </p>
+
+      <div class="hero__cta">
+        <a href="#/proyectos" class="btn magnetic">
+          <span>Ver proyectos</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#/contacto" class="btn btn--ghost magnetic"><span>Iniciar un proyecto</span></a>
+      </div>
+    </div>
+
+    <div class="hero__foot container">
+      <div class="hero__meta">
+        Diseño · Ingeniería · Crecimiento<br>
+        <b>Desde Perú, para tu próxima idea</b>
+      </div>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track" id="tickerTrack">
+      <div>
+        <span>Diseño web</span><b>✳</b><span>Software a medida</span><b>✳</b><span>E-commerce</span><b>✳</b>
+        <span>Automatización</span><b>✳</b><span>Experiencias digitales</span><b>✳</b><span>Marketing &amp; crecimiento</span><b>✳</b>
+        <span>Identidad digital</span><b>✳</b><span>Plataformas</span><b>✳</b>
+      </div>
+    </div>
+  </div>
+
+  <!-- PUNTO DE VISTA -->
+  <section class="section" id="manifiesto">
+    <div class="container">
+      <div class="manifesto__grid">
+        <div class="manifesto__quote">
+          <h2 class="display display--xl" data-split>
+            No vendemos páginas web. Construimos el lugar donde tu marca ocurre.
+          </h2>
+        </div>
+
+        <div>
+          <div class="manifesto__cols">
+            <p data-reveal>
+              Cada proyecto empieza con una pregunta incómoda:
+              <strong>¿por qué alguien debería recordarte?</strong>
+              El resto es materia —tipografía, luz, código, ritmo— y oficio para responderla.
+            </p>
+            <p data-reveal style="--d:.12s">
+              Trabajamos con la precisión de un estudio de ingeniería y la sensibilidad de una
+              dirección de arte. Nada está ahí porque sí: cada píxel defiende una decisión.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRABAJO SELECCIONADO -->
+  <section class="section section--tight" id="trabajo">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-num">02 — Trabajo seleccionado</span>
+        <div class="rule"></div>
+        <a href="#/proyectos" class="link-arrow" style="font-size:10.5px">
+          Todos los proyectos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </div>
+
+      <div class="work-grid featured-grid">
+        <a href="#/proyectos/avila-parfums" class="proj proj--wide featured-card" data-reveal="clip">
+          <div class="proj__media"><div class="art art--photo"><img class="art__screenshot" src="assets/portfolio/avilaparfums.webp" width="1080" height="510" alt="Captura verificada del sitio de Ávila Parfums" loading="lazy"><span class="art__tag art__tag--verified">Captura verificada</span></div></div>
+          <div class="proj__meta"><div><div class="proj__name">Ávila Parfums</div><div class="proj__cat">Perfumería · Presencia de marca · Trabajo referenciado</div></div><span class="proj__arrow" aria-hidden="true">↗</span></div>
+        </a>
+        <a href="#/proyectos/dual-ingenieria" class="proj featured-card" data-reveal="clip" style="--d:.09s">
+          <div class="proj__media"><div class="art art--photo"><img class="art__screenshot" src="assets/portfolio/dual-ingenieria.webp" width="1080" height="540" alt="Captura verificada del sitio de Dual Ingeniería" loading="lazy"><span class="art__tag art__tag--verified">Captura verificada</span></div></div>
+          <div class="proj__meta"><div><div class="proj__name">Dual Ingeniería</div><div class="proj__cat">Ingeniería · Sitio corporativo · Trabajo referenciado</div></div><span class="proj__arrow" aria-hidden="true">↗</span></div>
+        </a>
+        <a href="#/proyectos/mova" class="proj featured-card" data-reveal="clip" style="--d:.16s">
+          <div class="proj__media"><div class="art art--photo" style="background-image:url('assets/portfolio/conceptos/mova.webp')"><img class="art__screenshot" src="assets/portfolio/capturas/mova.png" data-stage="0" data-remote="https://raw.githubusercontent.com/Abel-Castill0/Portafolio/main/public/previews/mova.png" data-fallback="assets/portfolio/conceptos/mova.webp" width="1080" height="550" alt="Vista de MOVA archivada en el portafolio de su desarrollador" loading="lazy"><span class="art__tag art__tag--verified">Captura archivada · Portafolio</span></div></div>
+          <div class="proj__meta"><div><div class="proj__name">MOVA</div><div class="proj__cat">Educación · Plataforma digital · Caso del sitio</div></div><span class="proj__arrow" aria-hidden="true">↗</span></div>
+        </a>
+      </div>
+      <p class="disclaimer" style="margin-top:34px">
+        Las portadas archivadas de proyectos se muestran con su procedencia. Cuando no existe captura pública, se indica «Visual conceptual».
+        La pertenencia al portafolio de un integrante no acredita por sí sola un encargo comercial de PazBel.
+      </p>
+    </div>
+  </section>
+
+  <!-- INTERLUDIO CINEMATOGRÁFICO — MOVIMIENTO CON PROPÓSITO -->
+  <section class="film-section section section--tight" id="film-studio" aria-labelledby="filmTitle">
+    <div class="container"><div class="sec-head"><span class="sec-num">03 — Movimiento y materia</span><div class="rule"></div></div>
+      <div class="film-layout">
+        <div class="film-copy" data-reveal><p class="eyebrow">Film de estudio / 00:06</p>
+          <h2 class="display display--lg" id="filmTitle">El diseño también <em>se mueve.</em></h2>
+          <p class="body-copy">Del concepto a la interfaz: un pequeño ensayo visual producido con imágenes verificadas del portafolio. Sin audio, sin stock y sin reproducirse solo.</p>
+          <button type="button" class="btn film-control" id="filmToggle" aria-pressed="false">Reproducir pieza <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="film-frame" data-reveal="clip"><video id="filmVideo" playsinline muted preload="none" poster="assets/motion/showreel-poster.webp" aria-label="Showreel visual de Ávila Parfums y Dual Ingeniería"><source src="assets/motion/showreel.webm" type="video/webm"></video>
+        <span class="film-frame__marker">PAZBEL / MOTION STUDY / 001</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCIPLINAS -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-num">04 — Disciplinas</span>
+        <div class="rule"></div>
+        <a href="#/servicios" class="link-arrow" style="font-size:10.5px">
+          Ver servicios
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </div>
+
+      <div class="disc">
+        <a href="#/servicios" class="disc__row" data-reveal>
+          <span class="disc__n">01</span>
+          <span class="disc__t">Diseño web</span>
+          <span class="disc__d">Dirección de arte, sistemas de diseño e interfaces que se sienten inevitables.</span>
+        </a>
+        <a href="#/servicios" class="disc__row" data-reveal style="--d:.06s">
+          <span class="disc__n">02</span>
+          <span class="disc__t">Desarrollo</span>
+          <span class="disc__d">Corporativos, e-commerce y plataformas. Código limpio, rápido, mantenible.</span>
+        </a>
+        <a href="#/servicios" class="disc__row" data-reveal style="--d:.12s">
+          <span class="disc__n">03</span>
+          <span class="disc__t">Software a medida</span>
+          <span class="disc__d">Herramientas que resuelven lo que ninguna plantilla resuelve.</span>
+        </a>
+        <a href="#/servicios" class="disc__row" data-reveal style="--d:.18s">
+          <span class="disc__n">04</span>
+          <span class="disc__t">Automatización</span>
+          <span class="disc__d">Menos fricción, menos errores, más tiempo para lo importante.</span>
+        </a>
+        <a href="#/servicios" class="disc__row" data-reveal style="--d:.24s">
+          <span class="disc__n">05</span>
+          <span class="disc__t">Experiencias digitales</span>
+          <span class="disc__d">Motion, interacción y profundidad. Cuando el asombro es parte de la estrategia.</span>
+        </a>
+        <a href="#/servicios" class="disc__row" data-reveal style="--d:.30s">
+          <span class="disc__n">06</span>
+          <span class="disc__t">Crecimiento digital</span>
+          <span class="disc__d">Marketing, contenido y datos al servicio del diseño.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO TEASER -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-num">05 — Método</span>
+        <div class="rule"></div>
+      </div>
+      <div class="manifesto__grid" style="align-items:end">
+        <h2 class="display display--lg" data-split>Diseño, desarrollo e impulso. En ese orden, y en ese ritmo.</h2>
+        <div>
+          <p class="body-copy" data-reveal>
+            Tres fases que no se saltan. La primera define qué hay que decir;
+            la segunda construye el cómo; la tercera asegura que alguien lo escuche.
+          </p>
+          <a href="#/proceso" class="link-arrow" style="margin-top:26px" data-reveal>
+            Ver metodología
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="tiers" style="margin-top:clamp(36px,6vw,64px);border-color:var(--line);background:var(--line)">
+        <div class="tier" data-reveal>
+          <div class="tier__name">Fase 01</div>
+          <div class="display display--md">Diseño</div>
+          <p class="tier__desc">Escuchamos, cuestionamos, dibujamos. La estrategia se vuelve sistema visual.</p>
+        </div>
+        <div class="tier" data-reveal style="--d:.08s">
+          <div class="tier__name">Fase 02</div>
+          <div class="display display--md">Desarrollo</div>
+          <p class="tier__desc">Escribimos el código como si fuera a durar diez años. Porque debería.</p>
+        </div>
+        <div class="tier" data-reveal style="--d:.16s">
+          <div class="tier__name">Fase 03</div>
+          <div class="display display--md">Impulso</div>
+          <p class="tier__desc">Lanzamos, medimos y afinamos. El sitio empieza a trabajar cuando sale al mundo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTUDIO TEASER -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-num">06 — Estudio</span>
+        <div class="rule"></div>
+      </div>
+      <div class="manifesto__grid">
+        <blockquote class="display display--lg" data-split style="max-width:20ch">
+          «El lujo no es lo que se añade. Es lo que no se atreve a sobrar.»
+        </blockquote>
+        <div>
+          <p class="body-copy" data-reveal>
+            PazBel Studios reúne diseño e ingeniería digital. Unimos criterio visual y técnico
+            para evitar que un buen diseño se pierda en la implementación. Diseño e ingeniería no son departamentos separados:
+            son la misma conversación.
+          </p>
+          <a href="#/estudio" class="link-arrow" style="margin-top:26px" data-reveal>
+            Conocer el estudio
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSER -->
+  <section class="closer">
+    <canvas class="closer__canvas field" data-field data-density=".55" aria-hidden="true"></canvas>
+    <div class="closer__inner container">
+      <span class="eyebrow" data-reveal>06 — Siguiente paso</span>
+      <h2 class="closer__title" data-split>¿Construimos algo que valga la pena recordar?</h2>
+      <p class="lede" style="text-align:center;max-width:48ch" data-reveal style="--d:.1s">
+        Cuéntanos qué tienes en mente. Respondemos con una primera lectura honesta del proyecto —
+        sin plantillas y sin discurso de ventas.
+      </p>
+      <div class="closer__cta">
+        <a href="#/contacto" class="btn magnetic">
+          <span>Iniciar la conversación</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#/cotizar" class="btn btn--ghost magnetic"><span>Estimar inversión</span></a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================
+     VIEW: PROYECTOS · ARCHIVO EDITORIAL INTERACTIVO
+     ============================================================ -->
+<section class="view portfolio-page" data-view="proyectos" id="view-proyectos" hidden>
+  <header class="portfolio-hero container">
+    <div class="portfolio-hero__top">
+      <span class="eyebrow">PAZBEL / ARCHIVO DIGITAL</span>
+      <span class="portfolio-hero__edition">SELECCIÓN DE TRABAJOS · EDICIÓN 2026</span>
+    </div>
+    <h1 class="portfolio-hero__title">Lo que imaginamos,<br><em>lo hacemos real.</em></h1>
+    <div class="portfolio-hero__bottom">
+      <p>Experiencias para marcas, plataformas y negocios. Una colección de proyectos propios, referencias del equipo y exploraciones digitales, con su procedencia indicada.</p>
+      <div class="portfolio-hero__stat"><strong id="portfolioCount">23</strong><span>PROYECTOS<br>DOCUMENTADOS</span></div>
+    </div>
+    <div class="portfolio-hero__orb" aria-hidden="true"><i></i><i></i><i></i></div>
+  </header>
+
+  <section class="portfolio-feature container" id="featuredWrap" aria-labelledby="featuredHeading">
+    <div class="portfolio-section-head">
+      <div><span class="portfolio-kicker">01 — CURADURÍA</span><h2 id="featuredHeading">En primer <em>plano.</em></h2></div>
+      <p>Tres trabajos con capturas documentadas, presentados con más espacio para explorar sus detalles.</p>
+    </div>
+    <div class="featured-work" id="featuredWork"></div>
+  </section>
+
+  <section class="portfolio-library container" aria-labelledby="archiveHeading">
+    <div class="portfolio-section-head portfolio-section-head--archive">
+      <div><span class="portfolio-kicker">02 — EXPLORAR</span><h2 id="archiveHeading">Archivo <em>completo.</em></h2></div>
+      <p>Filtra por especialidad, busca un proyecto o cambia la presentación de la galería.</p>
+    </div>
+    <div class="portfolio-tools">
+      <label class="portfolio-search" for="projectSearch">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+        <input id="projectSearch" type="search" placeholder="Buscar proyecto, sector o tecnología..." autocomplete="off" aria-label="Buscar en el archivo de proyectos">
+        <span class="portfolio-search__key" aria-hidden="true">↵</span>
+      </label>
+      <div class="filters" id="filters" role="group" aria-label="Filtrar proyectos por especialidad"></div>
+      <div class="portfolio-toolbar">
+        <p id="projectResults" role="status" aria-live="polite">Todos los proyectos</p>
+        <div class="portfolio-toolbar__actions">
+          <button id="projectReset" class="portfolio-reset" type="button" hidden>Limpiar filtros ↺</button>
+          <label class="portfolio-sort">Orden <select id="projectSort" aria-label="Ordenar proyectos"><option value="curated">Curado</option><option value="az">A — Z</option></select></label>
+          <div class="portfolio-layouts" id="projectLayouts" role="group" aria-label="Cambiar vista del portafolio">
+            <button type="button" data-layout="grid" aria-pressed="true" aria-label="Vista galería" title="Galería"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></button>
+            <button type="button" data-layout="list" aria-pressed="false" aria-label="Vista lista" title="Lista"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 5h13M8 12h13M8 19h13"/><circle cx="3" cy="5" r="1"/><circle cx="3" cy="12" r="1"/><circle cx="3" cy="19" r="1"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="work-grid portfolio-grid" id="workGrid"></div>
+    <div class="portfolio-empty" id="projectEmpty" hidden><span class="portfolio-empty__symbol" aria-hidden="true">∅</span><h3>No hay coincidencias.</h3><p>Prueba otra palabra o cambia los filtros para descubrir más trabajos.</p><button id="projectEmptyReset" type="button" class="btn">Ver todos los proyectos ↗</button></div>
+    <div class="portfolio-pagination"><p id="projectSummary" aria-live="polite"></p><button id="projectMore" class="portfolio-more" type="button" hidden>Mostrar más proyectos ↓</button></div>
+    <aside class="portfolio-note"><span>NOTA EDITORIAL</span><p>Las imágenes identificadas como «captura archivada» proceden del portafolio; pueden diferir de la versión actual. Los proyectos sin material visual público muestran composiciones conceptuales. No todos los trabajos son encargos comerciales de PazBel.</p></aside>
+    <div class="portfolio-outro"><span>¿El próximo proyecto?</span><h2>Podría ser <em>el tuyo.</em></h2><a href="#/contacto" class="btn magnetic">Hablemos de tu idea <span aria-hidden="true">↗</span></a></div>
+  </section>
+</section>
+
+<!-- ============================================================
+     VIEW: DETALLE DE PROYECTO
+     ============================================================ -->
+<section class="view" data-view="proyecto" id="view-proyecto" hidden>
+  <div class="pd-hero container">
+    <a href="#/proyectos" class="link-arrow" style="font-size:10.5px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform:rotate(180deg)"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      Volver a proyectos
+    </a>
+
+    <div style="margin-top:clamp(28px,5vw,52px);display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow" id="pdCat">—</span>
+        <h1 class="pd-title" id="pdName" style="margin-top:16px">—</h1>
+        <p class="pd-tagline" id="pdTag">—</p>
+      </div>
+      <span class="eyebrow" id="pdYear" style="color:var(--violet)">—</span>
+    </div>
+
+    <div class="pd-cover" data-reveal="clip">
+      <div class="art" id="pdCover">
+        <span class="art__glyph" id="pdGlyph">—</span>
+        <span class="art__ring"></span>
+        <span class="art__tag">Composición conceptual</span>
+      </div>
+    </div>
+
+    <div class="pd-outbound"><a id="pdLink" class="btn btn--ghost" href="#/proyectos" target="_blank" rel="noopener noreferrer" hidden>Visitar sitio / recurso ↗</a><span class="disclaimer">La autoría comercial y el estado de cada referencia deben confirmarse con sus responsables.</span></div>
+    <dl class="pd-meta">
+      <div><dt>Rol</dt><dd id="pdRole">—</dd></div>
+      <div><dt>Referencia</dt><dd id="pdYear2">—</dd></div>
+      <div><dt>Categoría</dt><dd id="pdCat2">—</dd></div>
+      <div><dt>Stack</dt><dd id="pdStackTop">—</dd></div>
+    </dl>
+  </div>
+
+  <div class="section container">
+    <div class="pd-body">
+      <div>
+        <h3>Contexto</h3>
+        <p id="pdContext" data-reveal>—</p>
+        <h3 style="margin-top:34px">El reto</h3>
+        <p id="pdChallenge" data-reveal>—</p>
+      </div>
+      <div>
+        <h3>La solución</h3>
+        <p id="pdSolution" data-reveal>—</p>
+        <p id="pdSolution2" data-reveal style="--d:.08s">—</p>
+        <div class="pd-features" id="pdFeatures"></div>
+      </div>
+    </div>
+
+    <figure class="pd-figure" data-reveal="clip">
+      <div class="art" id="pdArt2" style="aspect-ratio:21/9">
+        <span class="art__ring"></span>
+        <span class="art__tag">Composición conceptual</span>
+      </div>
+      <figcaption id="pdCap2">Visual conceptual de sistema — no es una captura de producción.</figcaption>
+    </figure>
+
+    <div class="pd-body" style="margin-top:clamp(40px,7vw,80px)">
+      <div>
+        <h3>Tecnologías</h3>
+        <ul class="tags" id="pdStack"></ul>
+      </div>
+      <div>
+        <h3>Características clave</h3>
+        <ul class="tags" id="pdStack2" style="gap:8px"></ul>
+        <p class="disclaimer" style="margin-top:26px">
+          Ficha informativa de portafolio. No se atribuye automáticamente cada trabajo al estudio y no se presentan resultados no verificados.
+        </p>
+      </div>
+    </div>
+
+    <a href="#/proyectos" class="next-proj" id="pdNext" style="margin-top:clamp(50px,8vw,90px)">
+      <div>
+        <div class="lbl">Siguiente proyecto</div>
+        <div class="nm" id="pdNextName">—</div>
+      </div>
+      <span class="proj__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     VIEW: SERVICIOS
+     ============================================================ -->
+<section class="view" data-view="servicios" id="view-servicios" hidden>
+  <header class="page-head container">
+    <span class="eyebrow">Capacidades</span>
+    <h1 class="page-head__title" data-split>Servicios</h1>
+    <div class="page-head__row">
+      <p class="lede" data-reveal>
+        Seis capacidades que se combinan según el proyecto: desde una presencia de marca hasta plataformas y automatizaciones.
+      </p>
+    </div>
+  </header>
+
+  <div class="container" style="padding-bottom:clamp(60px,10vh,120px)">
+    <div class="acc" id="servicesAcc">
+
+      <div class="acc__item">
+        <button class="acc__btn" aria-expanded="false">
+          <span class="acc__n">01</span>
+          <span class="acc__t">Diseño web &amp; dirección de arte</span>
+          <span class="acc__ico" aria-hidden="true"></span>
+        </button>
+        <div class="acc__panel"><div>
+          <div class="acc__inner">
+            <p>Interfaces con criterio editorial: jerarquía, tipografía, ritmo y espacio negativo.
+              Diseñamos sistemas, no pantallas sueltas — para que el sitio siga siendo coherente
+              cuando el contenido crezca.</p>
+            <ul>
+              <li>Investigación y arquitectura de información</li>
+              <li>Sistema visual y biblioteca de componentes</li>
+              <li>Prototipo navegable de alta fidelidad</li>
+              <li>Diseño responsive y estados de interacción</li>
+            </ul>
+            <div class="acc__actions">
+              <a href="#/servicios/diseno-web" class="btn btn--sm"><span>Ver el detalle</span></a>
+              <a href="#/cotizar" class="btn btn--sm btn--ghost"><span>Cotizar</span></a>
+            </div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="acc__item">
+        <button class="acc__btn" aria-expanded="false">
+          <span class="acc__n">02</span>
+          <span class="acc__t">Desarrollo de sitios corporativos</span>
+          <span class="acc__ico" aria-hidden="true"></span>
+        </button>
+        <div class="acc__panel"><div>
+          <div class="acc__inner">
+            <p>Sitios rápidos, accesibles y mantenibles. Código propio, sin capas innecesarias
+              de plugins. La misma obsesión que ponemos en el diseño, aplicada al rendimiento.</p>
+            <ul>
+              <li>Maquetación semántica y accesible</li>
+              <li>CMS headless o gestor propio</li>
+              <li>Optimización de carga y Core Web Vitals</li>
+              <li>Integración con analítica y CRM</li>
+            </ul>
+            <div class="acc__actions"><a href="#/servicios/desarrollo-web" class="btn btn--sm"><span>Explorar el servicio</span></a> <a href="#/cotizar" class="btn btn--sm btn--ghost"><span>Cotizar</span></a></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="acc__item">
+        <button class="acc__btn" aria-expanded="false">
+          <span class="acc__n">03</span>
+          <span class="acc__t">Tiendas virtuales</span>
+          <span class="acc__ico" aria-hidden="true"></span>
+        </button>
+        <div class="acc__panel"><div>
+          <div class="acc__inner">
+            <p>Comercio donde la marca no se pierde en el checkout. Catálogos que se navegan
+              con gusto y un proceso de compra que no pide paciencia.</p>
+            <ul>
+              <li>Arquitectura de catálogo y filtros</li>
+              <li>Pasarelas de pago locales</li>
+              <li>Gestión de stock y pedidos</li>
+              <li>Optimización de conversión</li>
+            </ul>
+            <div class="acc__actions"><a href="#/servicios/tiendas" class="btn btn--sm"><span>Explorar el servicio</span></a> <a href="#/cotizar" class="btn btn--sm btn--ghost"><span>Cotizar</span></a></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="acc__item">
+        <button class="acc__btn" aria-expanded="false">
+          <span class="acc__n">04</span>
+          <span class="acc__t">Software a medida</span>
+          <span class="acc__ico" aria-hidden="true"></span>
+        </button>
+        <div class="acc__panel"><div>
+          <div class="acc__inner">
+            <p>Cuando el proceso no cabe en ninguna herramienta existente, se construye.
+              Paneles, portales, integraciones y lógica de negocio hecha a la medida exacta.</p>
+            <ul>
+              <li>Portales de clientes y back-offices</li>
+              <li>APIs e integraciones</li>
+              <li>Modelado de datos y roles</li>
+              <li>Mantenimiento evolutivo</li>
+            </ul>
+            <div class="acc__actions"><a href="#/servicios/software" class="btn btn--sm"><span>Explorar el servicio</span></a> <a href="#/cotizar" class="btn btn--sm btn--ghost"><span>Cotizar</span></a></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="acc__item">
+        <button class="acc__btn" aria-expanded="false">
+          <span class="acc__n">05</span>
+          <span class="acc__t">Automatización de procesos</span>
+          <span class="acc__ico" aria-hidden="true"></span>
+        </button>
+        <div class="acc__panel"><div>
+          <div class="acc__inner">
+            <p>Las tareas repetitivas son un impuesto silencioso. Identificamos dónde se pierde
+              tiempo y lo convertimos en flujo automático, con trazabilidad.</p>
+            <ul>
+              <li>Mapeo de procesos y cuellos de botella</li>
+              <li>Integración entre sistemas</li>
+              <li>Notificaciones y reportes automáticos</li>
+              <li>Documentación operativa</li>
+            </ul>
+            <div class="acc__actions"><a href="#/servicios/automatizacion" class="btn btn--sm"><span>Explorar el servicio</span></a> <a href="#/cotizar" class="btn btn--sm btn--ghost"><span>Cotizar</span></a></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="acc__item">
+        <button class="acc__btn" aria-expanded="false">
+          <span class="acc__n">06</span>
+          <span class="acc__t">Experiencias digitales &amp; crecimiento</span>
+          <span class="acc__ico" aria-hidden="true"></span>
+        </button>
+        <div class="acc__panel"><div>
+          <div class="acc__inner">
+            <p>Motion, interacción y narrativa por scroll cuando aportan algo. Y después:
+              contenido, posicionamiento y datos para que la experiencia llegue a alguien.</p>
+            <ul>
+              <li>Dirección de motion y microinteracciones</li>
+              <li>Scrollytelling y storytelling visual</li>
+              <li>SEO técnico y de contenido</li>
+              <li>Analítica, experimentación y mejora continua</li>
+            </ul>
+            <div class="acc__actions"><a href="#/servicios/motion" class="btn btn--sm"><span>Explorar el servicio</span></a> <a href="#/cotizar" class="btn btn--sm btn--ghost"><span>Cotizar</span></a></div>
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+
+    <div class="closer__cta" style="justify-content:flex-start;margin-top:clamp(50px,8vw,90px)">
+      <a href="#/contacto" class="btn magnetic"><span>Cuéntanos tu caso</span></a>
+      <a href="#/cotizar" class="btn btn--ghost magnetic"><span>Estimar inversión</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VIEW: DETALLE DE SERVICIO
+     ============================================================ -->
+<section class="view" data-view="servicio" id="view-servicio" hidden>
+<header class="page-head container"><a href="#/servicios" class="eyebrow" style="display:inline-block;margin-bottom:22px">↖ Todos los servicios</a><span class="eyebrow" id="srvIndex">01 — Capacidad</span><h1 class="page-head__title" id="srvTitle">Servicio</h1><div class="page-head__row"><p class="lede" id="srvLead"></p></div></header>
+<div class="container service-detail"><div class="service-detail__side"><div class="service-detail__orb" aria-hidden="true"><div></div><span id="srvSymbol">PB/01</span></div><p class="eyebrow">Diseño con intención. Tecnología con criterio.</p></div><div class="service-detail__body">
+<span class="sec-num">El enfoque</span><h2 class="display display--lg" id="srvStatement"></h2><p class="body-copy" id="srvBody"></p>
+<div class="rule" style="margin:42px 0"></div><span class="sec-num">Lo que puede incluir</span><ul class="service-detail__deliver" id="srvBullets"></ul>
+<div class="closer__cta" style="justify-content:flex-start;margin-top:46px"><a class="btn" href="#/cotizar">Empezar con una idea ↗</a><a class="btn btn--ghost" href="#/proyectos">Ver trabajos</a></div>
+</div></div></section>
+
+<section class="view" data-view="estudio" id="view-estudio" hidden>
+  <header class="page-head container">
+    <span class="eyebrow">Nosotros</span>
+    <h1 class="page-head__title" data-split>El estudio</h1>
+  </header>
+
+  <div class="section container" style="padding-top:0">
+    <h2 class="display display--xl" data-split style="max-width:24ch">
+      Somos un estudio creativo donde diseño e ingeniería trabajan juntos.
+    </h2>
+
+    <div class="manifesto__grid" style="margin-top:clamp(40px,7vw,80px)">
+      <div class="body-copy" data-reveal>
+        <p>PazBel nace de una convicción simple: el diseño y la ingeniería no deberían ser
+          departamentos que se pasan documentos por encima de una pared. Cuando se piensan
+          juntos, el resultado deja de ser un sitio web y empieza a ser un producto.</p>
+        <p>Por eso trabajamos pocos proyectos a la vez. No es una pose: es la única forma
+          que conocemos de cuidar la tipografía, el rendimiento y los detalles que nadie
+          nota conscientemente pero todos perciben.</p>
+        <p>No tenemos un estilo favorito. Tenemos un método y una exigencia. Lo que cambia
+          es la respuesta correcta para cada marca.</p>
+      </div>
+      <div>
+        <div class="pd-features" style="margin-top:0">
+          <div class="pd-feature" data-reveal><span>Principio 01</span><p>El detalle no es decoración. Es la diferencia entre correcto y memorable.</p></div>
+          <div class="pd-feature" data-reveal style="--d:.08s"><span>Principio 02</span><p>Si no se puede medir, al menos debe poder sentirse. Y si se puede medir, se mide.</p></div>
+          <div class="pd-feature" data-reveal style="--d:.16s"><span>Principio 03</span><p>La velocidad es parte del diseño. Un sitio lento es un sitio mal diseñado.</p></div>
+          <div class="pd-feature" data-reveal style="--d:.24s"><span>Principio 04</span><p>La accesibilidad no se negocia. Es criterio, no cumplimiento.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <figure class="pd-figure" data-reveal="clip">
+      <div class="art art--murex" style="aspect-ratio:21/9">
+        <span class="art__ring"></span>
+        <span class="art__tag">Composición conceptual</span>
+      </div>
+      <figcaption>Material de marca — visual conceptual del prototipo.</figcaption>
+    </figure>
+
+    <div class="closer__cta" style="justify-content:flex-start;margin-top:clamp(50px,8vw,90px)">
+      <a href="#/proceso" class="btn magnetic"><span>Ver metodología</span></a>
+      <a href="#/contacto" class="btn btn--ghost magnetic"><span>Escríbenos</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VIEW: PROCESO
+     ============================================================ -->
+<section class="view" data-view="proceso" id="view-proceso" hidden>
+  <header class="page-head container">
+    <span class="eyebrow">Metodología</span>
+    <h1 class="page-head__title" data-split>Diseño.<br>Desarrollo.<br>Impulso.</h1>
+    <div class="page-head__row">
+      <p class="lede" data-reveal>
+        Tres fases. Sin atajos. Cada una termina con algo verificable antes de pasar a la siguiente.
+      </p>
+    </div>
+  </header>
+
+  <div class="section container" style="padding-top:0">
+    <div class="process">
+      <div class="process__sticky">
+        <div class="process__visual">
+          <div class="process__ring" id="procRing"></div>
+          <span class="process__num" id="procNum">01</span>
+          <span class="process__label" id="procLabel">Diseño</span>
+        </div>
+      </div>
+
+      <div class="steps" id="steps">
+        <article class="step active" data-phase="0">
+          <div class="step__n">Fase 01</div>
+          <h2 class="step__t">Diseño</h2>
+          <p class="step__d">Escuchamos, cuestionamos, dibujamos. Aquí se decide qué hay que decir
+            y a quién. Todo lo demás es consecuencia de esta fase.</p>
+          <ul class="step__list">
+            <li>Descubrimiento</li><li>Arquitectura</li><li>Dirección de arte</li><li>Prototipo</li>
+          </ul>
+        </article>
+
+        <article class="step" data-phase="1">
+          <div class="step__n">Fase 02</div>
+          <h2 class="step__t">Desarrollo</h2>
+          <p class="step__d">Escribimos el código como si fuera a durar diez años. Componentes
+            claros, accesibilidad real, rendimiento medido — no prometido.</p>
+          <ul class="step__list">
+            <li>Frontend</li><li>Sistemas</li><li>Integraciones</li><li>QA &amp; accesibilidad</li>
+          </ul>
+        </article>
+
+        <article class="step" data-phase="2">
+          <div class="step__n">Fase 03</div>
+          <h2 class="step__t">Impulso</h2>
+          <p class="step__d">El lanzamiento no es el final. Medimos, afinamos y acompañamos el
+            crecimiento con datos y decisiones de contenido.</p>
+          <ul class="step__list">
+            <li>Lanzamiento</li><li>Analítica</li><li>SEO</li><li>Iteración</li>
+          </ul>
+        </article>
+
+        <article class="step" data-phase="3">
+          <div class="step__n">Continuo</div>
+          <h2 class="step__t">Evolución</h2>
+          <p class="step__d">Un sitio vivo cambia. Acompañamos con mantenimiento evolutivo,
+            nuevas secciones y mejoras basadas en comportamiento real.</p>
+          <ul class="step__list">
+            <li>Mantenimiento</li><li>Mejora continua</li><li>Nuevas capacidades</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VIEW: PRECIOS
+     ============================================================ -->
+<section class="view" data-view="precios" id="view-precios" hidden>
+<header class="page-head container"><span class="eyebrow">Inversión & continuidad</span><h1 class="page-head__title" data-split>Hagamos que<br>valga la pena.</h1><div class="page-head__row"><p class="lede">Una base clara para hablar de inversión. El alcance final se define después de entender tu proyecto.</p></div></header>
+<div class="container"><div class="blueprint-sequence" aria-label="Visualización del proceso del plano al producto">
+   <div class="blueprint-sequence__copy"><span class="eyebrow">Del plano a la obra</span><h2 class="display display--lg">Primero entendemos.<br>Después <em>construimos.</em></h2><p class="body-copy">Del primer trazo al software funcionando. Una idea que evoluciona paso a paso, con decisiones visibles.</p></div>
+   <div class="blueprint-sequence__visual" aria-hidden="true">
+    <span class="bp-corner bp-corner--a"></span><span class="bp-corner bp-corner--b"></span>
+    <svg viewBox="0 0 650 370" preserveAspectRatio="xMidYMid meet" class="bp-lines"><path d="M76 75H573V296H76Z"/><path d="M76 117H573M115 156H309V256H115Z M332 156H538V206H332Z M332 224H538V256H332Z"/><path d="M95 96H280"/><circle cx="100" cy="96" r="3"/><circle cx="118" cy="96" r="3"/><circle cx="136" cy="96" r="3"/></svg>
+    <div class="bp-product"><div class="bp-product__nav"><span class="bp-dots">● ● ●</span> PAZBEL / PRODUCT</div><div class="bp-product__body"><span>01 — IDEA</span><strong>Una interfaz,<br><i>un propósito.</i></strong><div class="bp-product__blocks"><b></b><b></b><b></b></div></div></div>
+    <div class="bp-caption">ESTRATEGIA <span>→</span> DISEÑO <span>→</span> DESARROLLO</div>
+   </div></div></div>
+<div class="container" style="padding-bottom:clamp(70px,11vh,140px)"><div class="sec-head"><span class="sec-num">01 — Desarrollo</span><div class="rule"></div></div>
+<div class="tiers tiers--four"><article class="tier " data-reveal><div class="tier__name">01 / Landing Page Pro</div><div class="tier__price"><small>Desde</small>S/ 89</div><p class="tier__desc">Para empezar a destacar</p><ul class="tier__list"><li>Una página responsive orientada a consultas</li><li>Presentación de servicios y WhatsApp</li><li>Optimización técnica inicial</li></ul><a class="btn btn--ghost" href="#/cotizar"><span>Explorar alcance</span></a><p class="disclaimer">Precio de lanzamiento</p></article>
+<article class="tier tier--featured" data-reveal><div class="tier__name">02 / Web Corporativa</div><div class="tier__price"><small>Desde</small>S/ 499</div><p class="tier__desc">Una presencia más completa</p><ul class="tier__list"><li>Hasta cinco secciones principales</li><li>Diseño personalizado y versión móvil</li><li>SEO técnico inicial</li></ul><a class="btn " href="#/cotizar"><span>Explorar alcance</span></a><p class="disclaimer">Pago único de desarrollo</p></article>
+<article class="tier " data-reveal><div class="tier__name">03 / E-commerce</div><div class="tier__price"><small>Desde</small>S/ 1.200</div><p class="tier__desc">Tu catálogo abierto al mundo</p><ul class="tier__list"><li>Catálogo y carrito</li><li>Opciones de pasarela o WhatsApp</li><li>Gestión base de stock y pedidos</li></ul><a class="btn btn--ghost" href="#/cotizar"><span>Explorar alcance</span></a><p class="disclaimer">Desarrollo base</p></article>
+<article class="tier " data-reveal><div class="tier__name">04 / Software a medida</div><div class="tier__price"><small>Desde</small>S/ 1.890</div><p class="tier__desc">Cuando tu idea necesita más</p><ul class="tier__list"><li>Paneles, reservas o herramientas internas</li><li>Roles, datos e integraciones</li><li>Requiere análisis de alcance</li></ul><a class="btn btn--ghost" href="#/cotizar"><span>Explorar alcance</span></a><p class="disclaimer">Desde / sujeto a cotización</p></article></div>
+<p class="disclaimer" style="margin-top:24px">Importes de referencia presentes en la versión comercial proporcionada de PazBel, expresados en soles. No constituyen cotización cerrada. IGV, dominio, hosting, licencias e integraciones externas sujetos a las condiciones de contratación.</p>
+<div class="sec-head" style="margin-top:clamp(90px,12vw,150px)"><span class="sec-num">02 — Continuidad</span><div class="rule"></div></div>
+<h2 class="display display--lg" style="margin-bottom:26px">Lanzar es el principio.<br><em>Cuidar lo que viene</em> también importa.</h2>
+<div class="monthly-list"><article class="monthly-card"><span>01</span><div><h3>Sin acompañamiento mensual</h3><p>Sin plan mensual</p></div><strong>Sin cuota</strong></article>
+<article class="monthly-card"><span>02</span><div><h3>Mantenimiento &amp; Velocidad</h3><p>Actualizaciones puntuales y soporte según alcance</p></div><strong>S/ 89/mes</strong></article>
+<article class="monthly-card"><span>03</span><div><h3>Plan Tracción</h3><p>Apoyo técnico y optimización de campaña según contrato</p></div><strong>S/ 349/mes</strong></article>
+<article class="monthly-card"><span>04</span><div><h3>Full Growth Partner</h3><p>Mejora continua y acompañamiento estratégico</p></div><strong>S/ 690/mes</strong></article></div>
+<p class="disclaimer" style="margin-top:18px">La inversión publicitaria se paga por separado; los límites de soporte y entregables se detallan en la propuesta comercial.</p>
+<div class="closer__cta" style="justify-content:flex-start;margin-top:54px"><a class="btn" href="#/cotizar">Preparar mi proyecto <span aria-hidden="true">↗</span></a></div>
+</div></section>
+
+<section class="view" data-view="cotizar" id="view-cotizar" hidden>
+  <header class="page-head container">
+    <span class="eyebrow">Cotizador interactivo</span>
+    <h1 class="page-head__title" data-split>Estima tu<br>inversión</h1>
+    <div class="page-head__row">
+      <p class="lede" data-reveal>
+        Selecciona la solución y describe tus necesidades. Los importes iniciales proceden de las referencias del sitio; los módulos, plazos y ampliaciones se cotizan según alcance.
+      </p>
+    </div>
+  </header>
+
+  <div class="container" style="padding-bottom:clamp(60px,10vh,120px)">
+    <div class="quote">
+      <form id="quoteForm" novalidate>
+        <!-- Tipo -->
+        <div class="qblock">
+          <div class="qblock__t"><span>01</span><b>Tipo de proyecto</b></div>
+          <div class="qopts qopts--2">
+            <label class="qopt qopt--radio">
+              <input type="radio" name="qtype" value="landing" checked>
+              <span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Landing page</b><span>Una página, un objetivo claro.</span></span>
+            </label>
+            <label class="qopt qopt--radio">
+              <input type="radio" name="qtype" value="corporativo">
+              <span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Sitio corporativo</b><span>Varias páginas con CMS.</span></span>
+            </label>
+            <label class="qopt qopt--radio">
+              <input type="radio" name="qtype" value="ecommerce">
+              <span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Tienda virtual</b><span>Catálogo, pagos, pedidos.</span></span>
+            </label>
+            <label class="qopt qopt--radio">
+              <input type="radio" name="qtype" value="plataforma">
+              <span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Plataforma / software</b><span>Lógica de negocio propia.</span></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Páginas -->
+        <div class="qblock">
+          <div class="qblock__t"><span>02</span><b>Páginas o vistas principales</b></div>
+          <input type="range" class="range" id="qPages" min="1" max="24" value="4" aria-label="Número de páginas">
+          <div class="range__val"><span>1</span><span id="qPagesOut">4 páginas</span><span>24</span></div>
+        </div>
+
+        <!-- Módulos -->
+        <div class="qblock">
+          <div class="qblock__t"><span>03</span><b>Módulos adicionales</b></div>
+          <div class="qopts qopts--2" id="qModules">
+            <label class="qopt"><input type="checkbox" value="cms"><span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Gestor de contenido</b><span>Según alcance</span></span></label>
+            <label class="qopt"><input type="checkbox" value="motion"><span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Motion avanzado</b><span>Según alcance</span></span></label>
+            <label class="qopt"><input type="checkbox" value="pago"><span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Pasarela de pagos</b><span>Según alcance</span></span></label>
+            <label class="qopt"><input type="checkbox" value="auto"><span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Automatizaciones</b><span>Según alcance</span></span></label>
+            <label class="qopt"><input type="checkbox" value="multi"><span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Multi-idioma</b><span>Según alcance</span></span></label>
+            <label class="qopt"><input type="checkbox" value="seo"><span class="qopt__box"></span>
+              <span class="qopt__txt"><b>SEO técnico &amp; analítica</b><span>Según alcance</span></span></label>
+          </div>
+        </div>
+
+        <!-- Plazo -->
+        <div class="qblock" style="margin-bottom:0">
+          <div class="qblock__t"><span>04</span><b>Plazo deseado</b></div>
+          <div class="qopts">
+            <label class="qopt qopt--radio">
+              <input type="radio" name="qtime" value="relax" checked>
+              <span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Sin prisa</b><span>Sin fecha de entrega definida.</span></span>
+            </label>
+            <label class="qopt qopt--radio">
+              <input type="radio" name="qtime" value="normal">
+              <span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Equilibrado</b><span>Plazo a acordar según alcance.</span></span>
+            </label>
+            <label class="qopt qopt--radio">
+              <input type="radio" name="qtime" value="fast">
+              <span class="qopt__box"></span>
+              <span class="qopt__txt"><b>Acelerado</b><span>Revisar viabilidad de urgencia.</span></span>
+            </label>
+          </div>
+        </div>
+      </form>
+
+      <!-- Resumen -->
+      <aside class="qsummary" aria-live="polite">
+        <div class="qsum__label">Base referencial de desarrollo</div>
+        <div class="qsum__amount" id="qAmount">S/ 89</div>
+        <p class="qsum__note">Importes de partida según el catálogo del proyecto. No incluye impuestos ni módulos adicionales; el precio final requiere una propuesta personalizada.</p>
+
+        <div class="qsum__break" id="qBreak"></div>
+
+        <a href="#/contacto" class="btn" id="qCta"><span>Solicitar propuesta</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="qsum__note" style="margin-top:16px">
+          Tu selección se añadirá al mensaje de contacto; al enviarlo podrás abrir WhatsApp con tu solicitud.
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VIEW: CONTACTO
+     ============================================================ -->
+<section class="view" data-view="contacto" id="view-contacto" hidden>
+  <header class="page-head container">
+    <span class="eyebrow">Contacto</span>
+    <h1 class="page-head__title" data-split>Hablemos</h1>
+    <div class="page-head__row">
+      <p class="lede" data-reveal>
+        Cuéntanos qué quieres construir. Prepararemos tu mensaje y abrirás el WhatsApp oficial del estudio para enviarlo directamente.
+      </p>
+    </div>
+  </header>
+
+  <div class="container" style="padding-bottom:clamp(70px,12vh,140px)">
+    <div class="form-grid">
+      <form id="contactForm" novalidate>
+        <div class="field">
+          <label for="cName">Nombre <span style="color:var(--magenta)">*</span></label>
+          <input type="text" id="cName" name="name" placeholder="Cómo te llamas" autocomplete="name" required>
+          <span class="field__err" id="err-cName"></span>
+        </div>
+        <div class="field">
+          <label for="cEmail">Correo <span style="color:var(--magenta)">*</span></label>
+          <input type="email" id="cEmail" name="email" placeholder="tu@empresa.com" autocomplete="email" required>
+          <span class="field__err" id="err-cEmail"></span>
+        </div>
+        <div class="field">
+          <label for="cCompany">Empresa o marca</label>
+          <input type="text" id="cCompany" name="company" placeholder="Opcional" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="cType">Tipo de proyecto</label>
+          <select id="cType" name="type">
+            <option value="">Selecciona una opción</option>
+            <option>Sitio corporativo</option>
+            <option>Tienda virtual</option>
+            <option>Software a medida</option>
+            <option>Rediseño / identidad digital</option>
+            <option>Experiencia digital</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cMsg">Cuéntanos del proyecto <span style="color:var(--magenta)">*</span></label>
+          <textarea id="cMsg" name="message" placeholder="Objetivo, contexto, plazos, referencias…" required></textarea>
+          <span class="field__err" id="err-cMsg"></span>
+        </div>
+
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+        <button type="submit" class="btn magnetic" style="margin-top:14px">
+          <span>Continuar en WhatsApp</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+
+      <aside>
+        <div class="pd-features" style="margin-top:0;grid-template-columns:1fr">
+          <div class="pd-feature">
+            <span>Qué pasa después</span>
+            <p>Tu mensaje se abrirá en WhatsApp para que lo revises y lo envíes. No se guarda en un servidor de esta demostración.</p>
+          </div>
+          <div class="pd-feature">
+            <span>WhatsApp oficial</span>
+            <p><a href="https://wa.me/51916666934" target="_blank" rel="noopener noreferrer">+51 916 666 934 ↗</a></p>
+          </div>
+          <div class="pd-feature">
+            <span>Ubicación</span>
+            <p>Lima, Perú · Trabajo remoto con clientes en cualquier zona horaria.</p>
+          </div>
+        </div>
+
+        <p class="disclaimer" style="margin-top:26px">
+          <strong style="color:var(--ink)">Privacidad:</strong> el formulario no envía datos a un servidor propio. Tu navegador preparará un mensaje para WhatsApp; decidirás allí si deseas enviarlo.
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <div class="footer__mark">PazBel<br>Studios<em>Estudio creativo &amp; ingeniería digital</em></div>
+      </div>
+      <div class="footer__col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#/">Inicio</a></li>
+          <li><a href="#/proyectos">Proyectos</a></li>
+          <li><a href="#/servicios">Servicios</a></li>
+          <li><a href="#/estudio">Estudio</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Proceso</h4>
+        <ul>
+          <li><a href="#/proceso">Metodología</a></li>
+          <li><a href="#/precios">Inversión</a></li>
+          <li><a href="#/cotizar">Cotizador</a></li>
+          <li><a href="#/contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://wa.me/51916666934" target="_blank" rel="noopener noreferrer">WhatsApp · +51 916 666 934</a></li>
+          <li><a href="#/contacto">Lima, Perú</a></li>
+          <li><a href="#/contacto">Iniciar un proyecto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 PazBel Studios · Propuesta creativa</span>
+      <span>Capturas verificadas y representaciones etiquetadas</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== PANEL DEMO ===================== -->
+<div class="demo" id="demo">
+  <div class="demo__panel" role="group" aria-label="Panel de demostración">
+    <div class="demo__h">Panel de demostración<br>No forma parte del sitio</div>
+    <div class="demo__row">
+      <button class="demo__btn" id="dRestart">↻ Reiniciar hero</button>
+      <button class="demo__btn on" id="dMotion">Animaciones: ON</button>
+    </div>
+    <div class="demo__sep"></div>
+    <div class="demo__h" style="margin-bottom:8px">Ir a vista</div>
+    <div class="demo__row">
+      <a href="#/" class="demo__btn">Inicio</a>
+      <a href="#/proyectos" class="demo__btn">Proyectos</a>
+      <a href="#/proyectos/mova" class="demo__btn">Detalle</a>
+      <a href="#/servicios" class="demo__btn">Servicios</a>
+      <a href="#/servicios/diseno-web" class="demo__btn">Servicio</a>
+      <a href="#/estudio" class="demo__btn">Estudio</a>
+      <a href="#/proceso" class="demo__btn">Proceso</a>
+      <a href="#/precios" class="demo__btn">Precios</a>
+      <a href="#/cotizar" class="demo__btn">Cotizar</a>
+      <a href="#/contacto" class="demo__btn">Contacto</a>
+    </div>
+  </div>
+  <button class="demo__toggle" id="demoToggle" aria-expanded="false">
+    <i></i> Demo
+  </button>
+</div>
+
+<script src="app.js" defer></script>
+</body>
 </html>

@@ -1,98 +1,60 @@
-# PazBel Studios 2.0 — Experiencia Inmersiva & Arquitectura Digital
+# PazBel Studios — Fusión Cinemática
 
-> **Diseño que impacta. Ingeniería que funciona.**  
-> Estudio peruano de desarrollo web, ingeniería de software y marketing digital fundado por Elías y Abel.
+**Propuesta de diseño y desarrollo (HTML + CSS + JavaScript, sin compilación).**
 
----
+## Cómo abrirlo
 
-## 🌟 Visión General
+1. Descomprime el ZIP.
+2. Entra a la carpeta `PazBel_Studios_Fusion_Cinematica`.
+3. Abre `index.html` con Chrome, Edge, Brave o Firefox.
+4. Prueba el menú, la navegación a Proyectos, Servicios, Proceso, Inversión, Cotizar y Contacto.
 
-**PazBel Studios 2.0** es la evolución y rediseño integral de la plataforma corporativa de PazBel Studios. Migrada desde una versión estática a una arquitectura moderna basada en **React 19, TypeScript, Vite 6, Three.js (React Three Fiber) y animaciones de precisión GSAP (ScrollTrigger + `@gsap/react`)**.
+No requiere Node, npm, Vite, React, servidor ni base de datos. El acceso a Internet **solo se requiere** para cargar las tipografías opcionales de Google Fonts y para abrir recursos externos como WhatsApp; las tipografías tienen fallback local. Todos los JS, CSS, logos, capturas verificadas y el pequeño vídeo están dentro del ZIP.
 
-La plataforma implementa la dirección visual **Chromatic Engineering**:
-- **Monograma PB 3D**: Escultura tridimensional en tiempo real con materiales PBR iridiscentes derivados del logotipo oficial (espectro cian, azul, violeta, magenta y coral).
-- **Arquitectura Double-Bezel**: Bisel exterior translúcido con micro-halo y núcleo interior concéntrico mathematically aligned.
-- **Scrollytelling Cinematográfico**: Navegación fluida por 11 capítulos independientes con identificadores estables y persistencia de scroll.
-- **Cotizador Dinámico**: Cálculo transparente y reactivo con desglose de inversión inicial y continuidad mensual, enlazado directamente a WhatsApp.
-- **Ecosistema Multi-Agente & 41 Skills**: Gobernanza por agentes autónomos (`@tech-lead`, `@ui-expert`, `@arch`, `@sec`, `@code-reviewer`) potenciados por UI/UX Pro Max, Emil Kowalski Design Engineering, Impeccable Style y Awesome Standards.
+Para desplegar, puedes alojar esta carpeta en cualquier servidor estático o usar el contenido en `public_html`. Se usa navegación `#/ruta` para que también funcione en `file://` sin reglas especiales.
 
----
+## Estructura
 
-## 🚀 Stack Tecnológico
+- `index.html`: vistas y contenido semántico de cada página.
+- `styles.css`: lenguaje visual, diseño responsive y motion CSS.
+- `app.js`: router, transiciones, canvas, filtros, casos, acordeones, cotizador, contacto y controles de showreel.
+- `assets/brand/`: el monograma y logo oficiales de la versión anterior de PazBel.
+- `assets/portfolio/`: dos capturas empaquetadas (Ávila y Dual), capturas públicas archivadas de otros ocho proyectos mediante URL GitHub y portadas conceptuales locales de respaldo.
+- `assets/motion/`: showreel breve original hecho a partir de las capturas y su poster.
+- `previews/`: vistas ilustrativas capturadas en Chromium durante QA con tipografías fallback.
+- `CAMBIOS_Y_FUENTES.md`: decisiones, límites de verificación y procedencia de datos.
 
-| Capa | Tecnologías |
-|---|---|
-| **Core Frontend** | React 19.3, TypeScript 5.8, Vite 6.4 |
-| **Gráficos 3D & WebGL** | Three.js 0.180, `@react-three/fiber` 9.8, `@react-three/drei` 10.7 |
-| **Animación & Motion** | GSAP 3.15, ScrollTrigger, `@gsap/react` 2.1 |
-| **Tipografía** | Archivo Variable (Display), Instrument Serif Italic (Editorial), Space Grotesk & Inter (Body/Mono) |
-| **Estilos & Tokens** | CSS Modules / Modern Vanilla CSS con tokens atómicos OLED |
-| **Gobernanza & AST** | GitNexus Code Intelligence, Archify Interactive Architecture |
-| **QA & Testing** | Playwright E2E Test Suite |
+## Navegación
 
----
+Inicio, archivo ampliado de 23 Proyectos, ficha individual por proyecto, seis Servicios y su ficha individual, Estudio, Proceso, Inversión, Cotizador y Contacto.
 
-## 🎭 Estructura de Capítulos (Landing por Escenas)
+## Controles
 
-1. **ESCENA 01 — HERO 3D (`#inicio`)**: Monograma tridimensional interactivo con cursor, titular monumental y CTAs de conversión.
-2. **ESCENA 02 — NUESTRA PROPUESTA (`#enfoque`)**: Diferenciación de marca ("Estar en internet no es lo mismo que destacar").
-3. **ESCENA 03 — SERVICIOS (`#servicios`)**: Bento grid interactivo con las 5 especialidades digitales.
-4. **ESCENA 04 — PROCESO (`#proceso`)**: Scrollytelling interactivo en 3 etapas (*Diseñamos*, *Desarrollamos*, *Impulsamos*) + sección del equipo (Elías y Abel).
-5. **ESCENA 05 — PORTAFOLIO INMERSIVO (`#proyectos`)**: Presentación destacada con mockups conceptuales de alta fidelidad para **MOVA** (EdTech), **Chambi Motors** (Automotriz) y **CarWashAlita** (Gestión).
-6. **ESCENA 06 — DEMOSTRACIÓN POR RUBRO (`#demo`)**: Selector interactivo para Restaurante, Taller, Moda y Consultoría.
-7. **ESCENA 07 — PRECIOS CLAROS (`#precios`)**: Planes comerciales transparentes (Landing Pro S/89, Corporativa S/499, E-commerce S/1,200, Software a medida desde S/1,890).
-8. **ESCENA 08 — CONTINUIDAD & SUSCRIPCIONES (`#marketing`)**: Acompañamiento mensual independiente (Mantenimiento S/89/mes, Tracción S/349/mes, Growth S/690/mes).
-9. **ESCENA 09 — COTIZADOR DINÁMICO (`#cotizador`)**: Selector interactivo con cálculo automático de pago inicial vs mensual y generación de mensaje estructurado a WhatsApp.
-10. **ESCENA 10 — PREGUNTAS FRECUENTES (`#faq`)**: Acordeón interactivo con 8 respuestas transparentes sobre hosting, alcance y tiempos.
-11. **ESCENA 11 — CIERRE CINEMATOGRÁFICO (`#contacto`)**: Conclusión editorial con botón directo a WhatsApp oficial y pie de página completo.
+- El Hero conserva la idea que te gustó de DeepSeek: título PAZBEL centrado, fondo oscuro con campo de luz y tipografía editorial.
+- El proceso integra una visualización propia inspirada en la narrativa **Plano a obra** de `xd.html`.
+- El showreel **no se reproduce automáticamente**: se activa con su botón.
+- El selector de proyectos filtra por categoría.
+- El cotizador utiliza los importes base existentes en el repositorio entregado; los extras requieren cotización personalizada.
+- El formulario de contacto **no guarda ni envía datos a un backend**: construye un enlace a WhatsApp oficial y requiere que el usuario envíe el mensaje allí.
+- Para ver el panel de pruebas de animación, abre `index.html?demo=1` (o añade `?demo=1` antes del `#` si ya hay una ruta).
 
----
+## Avisos de autoría y contenido
 
-## 📦 Instalación y Ejecución Local
+Los 23 proyectos están identificados como referencias del sitio o trabajos referenciados de integrantes del equipo. **No se atribuyen automáticamente como encargos comerciales de PazBel**. Dos capturas verificadas están empaquetadas; otras ocho capturas archivadas se obtienen del repositorio público del portafolio. Cuatro proyectos mantienen imágenes conceptuales identificadas. Para incorporarlas offline se incluye `PREPARAR_FOTOS.cmd`. Las fichas no inventan métricas, resultados ni características técnicas que no se hayan confirmado.
 
-### Prerrequisitos
-- Node.js `>= 20.11`
-- npm o pnpm
+Las tarifas base fueron tomadas del código `src/data/pricing.ts` del proyecto del usuario enviado previamente. Deben reconfirmarse antes de publicar ofertas comerciales. No se ha cambiado el número oficial `+51 916 666 934`.
 
-### Pasos
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/Elias040720/PazBel-Studios.git
-cd PazBel-Studios
+## Validación
 
-# 2. Instalar dependencias
-npm install
+Se ejecutaron pruebas de sintaxis JavaScript, inspección de estructura HTML, verificaciones básicas de navegador en Chromium a 1440 px y 390 px, acceso a rutas individuales y comportamiento de filtros y cotizador. También se comprobó la preparación del enlace de contacto por WhatsApp. No son una certificación WCAG, no incluyen pruebas de todos los dispositivos reales ni mediciones de Core Web Vitals en producción. Consulta `CAMBIOS_Y_FUENTES.md`.
 
-# 3. Iniciar el servidor de desarrollo
-npm run dev
+## Portafolio con fotos
 
-# 4. Verificar compilación de tipos
-npm run typecheck
+Hay 23 proyectos: dos capturas reales empaquetadas, ocho capturas archivadas del portafolio y trece representaciones conceptuales identificadas; las capturas archivadas también se pueden descargar desde GitHub. En Windows ejecuta `PREPARAR_FOTOS.cmd` para guardar las ocho imágenes como archivos locales. `CAPTURAR_SITIOS_ACTUALES.cmd` intenta capturar las vistas públicas con Chrome/Brave/Edge. Ver `EVIDENCIA_CAPTURAS.md`.
 
-# 5. Generar bundle de producción
-npm run build
-```
 
-El servidor local se iniciará en `http://localhost:5173/`.
+## Nuevo archivo editorial (23 proyectos)
 
----
+La sección **Proyectos** tiene tres casos destacados documentados, una galería completa con búsqueda por nombre/sector, filtros por especialidad, orden curado o alfabético, vista galería/lista, carga progresiva de nueve fichas, estado vacío con restablecimiento, controles y estados accesibles. Mantiene la estética DeepSeek del Hero de Inicio sin alterarla.
 
-## 🏛️ Gobernanza y Skills de IA
-
-El repositorio cuenta con una carpeta `.agents/` configurada para **Antigravity IDE**, **Claude Code** y otros motores de IA:
-- **[.agents/skills/](file:///.agents/skills/)**: 41 skills instaladas (UI/UX Pro Max, Emil Kowalski, Impeccable, GSAP, Three.js, Everything-Claude-Code).
-- **[.agents/rules/](file:///.agents/rules/)**: Reglas estrictas de inmutabilidad, cero CLS, contraste WCAG AA, y principios de código limpio.
-- **[GUIA_DE_INDICACIONES.md](file:///GUIA_DE_INDICACIONES.md)**: Manual del framework P-A-C-E para dar instrucciones de alto rendimiento a los agentes de IA.
-
----
-
-## 📞 Contacto y Canales Oficiales
-
-- **WhatsApp Oficial**: [+51 916 666 934](https://wa.me/51916666934)
-- **Ubicación**: Perú
-- **Fundadores**: Elías y Abel
-- **Repositorio Oficial**: [github.com/Elias040720/PazBel-Studios](https://github.com/Elias040720/PazBel-Studios)
-
----
-
-*Desarrollado con dedicación y excelencia técnica por PazBel Studios.*
+Se incorporaron como referencias del archivo personal: HopperCode, Dra. Blue, Librería Yarin, GOCCTA Studio, Intranet Zephyra, Lotus, Pastelería, LEE-ACH y Veterinaria. Las últimas nueve portadas son **composiciones conceptuales** y no capturas de sitios web. Los vínculos externos se muestran únicamente cuando se conoce una demo pública; no se enlaza código fuente. Los proyectos privados y de terceros sin autorización (p. ej., GLPI o Kryphos) no se publican automáticamente.
