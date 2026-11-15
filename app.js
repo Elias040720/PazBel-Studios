@@ -1095,12 +1095,21 @@
   function initNav(){
     const burger = $('#burger');
     const menu = $('#menu');
+    const menuLinks = $$('.menu__list a', menu);
+
+    function setMenuLinksEnabled(enabled){
+      menuLinks.forEach(link => {
+        if (enabled) link.removeAttribute('tabindex');
+        else link.setAttribute('tabindex','-1');
+      });
+    }
 
     function closeMenu(){
       if (!menu.classList.contains('open')) return;
       menu.removeEventListener('click', onMenuBackdropClick);
       menu.classList.remove('open');
       menu.setAttribute('aria-hidden','true');
+      setMenuLinksEnabled(false);
       burger.setAttribute('aria-expanded','false');
       burger.setAttribute('aria-label','Abrir menú');
       menu.inert=true;
@@ -1110,6 +1119,7 @@
     function openMenu(){
       menu.classList.add('open');
       menu.setAttribute('aria-hidden','false');
+      setMenuLinksEnabled(true);
       burger.setAttribute('aria-expanded','true');
       burger.setAttribute('aria-label','Cerrar menú');
       menu.inert=false;
@@ -1122,6 +1132,7 @@
     }
 
     menu.inert=true;
+    setMenuLinksEnabled(false);
     burger.addEventListener('click', () => {
       if (menu.classList.contains('open')) closeMenu(); else openMenu();
     });
@@ -1537,7 +1548,7 @@
      ============================================================ */
   function initAccordions(){
     $$('.acc').forEach((acc,ai) => {
-      $$('.acc__item',acc).forEach((item,i)=>{const btn=$('.acc__btn',item),panel=$('.acc__panel',item);if(!btn||!panel)return;const id='panel-'+ai+'-'+i;panel.id=id;panel.setAttribute('aria-hidden',String(!item.classList.contains('open')));btn.setAttribute('aria-controls',id);btn.id='toggle-'+ai+'-'+i;panel.setAttribute('role','region');panel.setAttribute('aria-labelledby',btn.id)});
+      $$('.acc__item',acc).forEach((item,i)=>{const btn=$('.acc__btn',item),panel=$('.acc__panel',item);if(!btn||!panel)return;const id='panel-'+ai+'-'+i;panel.id=id;const open=item.classList.contains('open');panel.inert=!open;panel.setAttribute('aria-hidden',String(!open));btn.setAttribute('aria-controls',id);btn.id='toggle-'+ai+'-'+i;panel.setAttribute('role','region');panel.setAttribute('aria-labelledby',btn.id)});
       acc.addEventListener('click', e => {
         const btn = e.target.closest('.acc__btn');
         if (!btn) return;
@@ -1546,14 +1557,14 @@
 
         $$('.acc__item', acc).forEach(it => {
           it.classList.remove('open');
-          const panel=$('.acc__panel',it);if(panel)panel.setAttribute('aria-hidden','true');
+          const panel=$('.acc__panel',it);if(panel){panel.inert=true;panel.setAttribute('aria-hidden','true');}
           const b = $('.acc__btn', it);
           if (b) b.setAttribute('aria-expanded','false');
         });
 
         if (!isOpen){
           item.classList.add('open');
-          const panel=$('.acc__panel',item);if(panel)panel.setAttribute('aria-hidden','false');
+          const panel=$('.acc__panel',item);if(panel){panel.inert=false;panel.setAttribute('aria-hidden','false');}
           btn.setAttribute('aria-expanded','true');
         }
       });

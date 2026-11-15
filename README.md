@@ -1,15 +1,14 @@
 # PazBel Studios — Fusión Cinemática
 
-**Propuesta de diseño y desarrollo (HTML + CSS + JavaScript, sin compilación).**
+Sitio estático en HTML, CSS y JavaScript. La experiencia pública no requiere framework, servidor de aplicación ni dependencias de producción; Node y Playwright solo se usan para las verificaciones automatizadas.
 
 ## Cómo abrirlo
 
-1. Descomprime el ZIP.
-2. Entra a la carpeta `PazBel_Studios_Fusion_Cinematica`.
-3. Abre `index.html` con Chrome, Edge, Brave o Firefox.
-4. Prueba el menú, la navegación a Proyectos, Servicios, Proceso, Inversión, Cotizar y Contacto.
+1. Abre `index.html` con Chrome, Edge, Brave o Firefox.
+2. También puedes servir esta carpeta con cualquier servidor estático.
+3. Explora Proyectos, Servicios, Proceso, Inversión, Cotizar y Contacto.
 
-No requiere Node, npm, Vite, React, servidor ni base de datos. El acceso a Internet **solo se requiere** para cargar las tipografías opcionales de Google Fonts y para abrir recursos externos como WhatsApp; las tipografías tienen fallback local. Todos los JS, CSS, logos, capturas verificadas y el pequeño vídeo están dentro del ZIP.
+El sitio no requiere Node, npm, Vite, React ni base de datos. Las herramientas de desarrollo usan Node 22 para ejecutar pruebas, validar HTML y lanzar Chromium. Internet permite cargar Google Fonts, capturas archivadas remotas y WhatsApp; hay fallback tipográfico y visual local.
 
 Para desplegar, puedes alojar esta carpeta en cualquier servidor estático o usar el contenido en `public_html`. Se usa navegación `#/ruta` para que también funcione en `file://` sin reglas especiales.
 
@@ -21,8 +20,11 @@ Para desplegar, puedes alojar esta carpeta en cualquier servidor estático o usa
 - `assets/brand/`: el monograma y logo oficiales de la versión anterior de PazBel.
 - `assets/portfolio/`: dos capturas empaquetadas (Ávila y Dual), capturas públicas archivadas de otros ocho proyectos mediante URL GitHub y portadas conceptuales locales de respaldo.
 - `assets/motion/`: showreel breve original hecho a partir de las capturas y su poster.
-- `previews/`: vistas ilustrativas capturadas en Chromium durante QA con tipografías fallback.
+- `previews/`: comparativas y capturas de QA.
 - `CAMBIOS_Y_FUENTES.md`: decisiones, límites de verificación y procedencia de datos.
+- `PRODUCT.md`: propósito, público y principios del estudio.
+- `tests/`: integridad de datos, navegación, cotizador, contacto, responsive y axe.
+- `.github/workflows/quality.yml`: verificaciones en cada pull request y push a `main`.
 
 ## Navegación
 
@@ -44,9 +46,18 @@ Los 23 proyectos están identificados como referencias del sitio o trabajos refe
 
 Las tarifas base fueron tomadas del código `src/data/pricing.ts` del proyecto del usuario enviado previamente. Deben reconfirmarse antes de publicar ofertas comerciales. No se ha cambiado el número oficial `+51 916 666 934`.
 
-## Validación
+## Verificaciones locales
 
-Se ejecutaron pruebas de sintaxis JavaScript, inspección de estructura HTML, verificaciones básicas de navegador en Chromium a 1440 px y 390 px, acceso a rutas individuales y comportamiento de filtros y cotizador. También se comprobó la preparación del enlace de contacto por WhatsApp. No son una certificación WCAG, no incluyen pruebas de todos los dispositivos reales ni mediciones de Core Web Vitals en producción. Consulta `CAMBIOS_Y_FUENTES.md`.
+Requiere Node 22. Instala las herramientas y el navegador de prueba, y ejecuta los mismos checks que CI:
+
+```sh
+npm ci
+npx playwright install chromium firefox webkit
+npm run lint:html
+npm run check
+```
+
+La suite automatizada recorre los 23 detalles, filtros, búsqueda, vista lista, paginación, menú, cotizador, validación del contacto, URL de WhatsApp (sin abrir ni enviar mensajes), diez anchos de pantalla y reglas axe WCAG. `npm run check` también valida la sintaxis JS. CI no despliega el sitio. Estas pruebas no certifican WCAG ni sustituyen QA en lectores de pantalla, dispositivos reales o métricas Core Web Vitals de producción.
 
 ## Portafolio con fotos
 
