@@ -235,10 +235,22 @@ test('all views fit responsive widths in Chromium, Firefox, and WebKit', async (
         const errors = [];
         page.on('pageerror', error => errors.push(error.message));
         await page.goto(`${entry}${route}`, { waitUntil: 'domcontentloaded' });
+        const segments = route.replace(/^#\//, '').split('/').filter(Boolean);
+        const expectedView = segments[0] === 'proyectos' ? (segments[1] ? 'proyecto' : 'proyectos') : segments[0] === 'servicios' ? (segments[1] ? 'servicio' : 'servicios') : (segments[0] || 'home');
+        await page.locator(`.view[data-view="${expectedView}"]:not([hidden])`).waitFor({ state: 'visible' });
+        await page.evaluate(() => Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 1200))]));
         for (const width of widths) {
           await page.setViewportSize({ width, height: 900 });
-          const dimensions = await page.evaluate(() => ({ client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }));
-          assert.ok(dimensions.scroll <= dimensions.client, `${name} ${route} ${width}px: overflow ${dimensions.scroll - dimensions.client}px`);
+          const dimensions = await page.evaluate(() => {
+            const client = document.documentElement.clientWidth;
+            const offenders = [...document.querySelectorAll('body *')].map(el => {
+              const rect = el.getBoundingClientRect();
+              const style = getComputedStyle(el);
+              return { tag: el.tagName, id: el.id, className: typeof el.className === 'string' ? el.className : '', right: Math.round(rect.right), left: Math.round(rect.left), width: Math.round(rect.width), scrollWidth: el.scrollWidth, whiteSpace: style.whiteSpace, text: (el.innerText || '').slice(0, 80) };
+            }).filter(el => el.right > client + 1 || el.left < -1).sort((a, b) => b.right - a.right).slice(0, 6);
+            return { client, scroll: document.documentElement.scrollWidth, offenders };
+          });
+          assert.ok(dimensions.scroll <= dimensions.client, `${name} ${route} ${width}px: overflow ${dimensions.scroll - dimensions.client}px; ${JSON.stringify(dimensions.offenders)}`);
         }
         assert.deepEqual(errors, [], `${name} ${route} JavaScript errors`);
         await page.close();
