@@ -1275,7 +1275,7 @@
       setTimeout(() => {
         veil.classList.remove('out');
         transitioning = false;
-        if (pendingPath !== null && pendingPath !== location.hash){
+        if (pendingPath !== null && pendingPath === location.hash){
           const p = pendingPath;
           pendingPath = null;
           navigate(p);
