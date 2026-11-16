@@ -45,7 +45,7 @@
     </nav>
     <div class="nav__actions">
       <a href="#/contacto" class="btn btn--sm magnetic"><span>Hablemos</span></a>
-      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+      <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
         <span></span><span></span>
       </button>
     </div>
@@ -55,14 +55,14 @@
 <!-- Menú móvil -->
 <div class="menu" id="menu" aria-hidden="true">
   <nav class="menu__list" aria-label="Menú móvil">
-    <a href="#/" style="transition-delay:.06s"><span>01</span>Inicio</a>
-    <a href="#/proyectos" style="transition-delay:.11s"><span>02</span>Proyectos</a>
-    <a href="#/servicios" style="transition-delay:.16s"><span>03</span>Servicios</a>
-    <a href="#/estudio" style="transition-delay:.21s"><span>04</span>Estudio</a>
-    <a href="#/proceso" style="transition-delay:.26s"><span>05</span>Proceso</a>
-    <a href="#/precios" style="transition-delay:.31s"><span>06</span>Inversión</a>
-    <a href="#/cotizar" style="transition-delay:.36s"><span>07</span>Cotizador</a>
-    <a href="#/contacto" style="transition-delay:.41s"><span>08</span>Contacto</a>
+    <a href="#/" tabindex="-1" style="transition-delay:.06s"><span>01</span>Inicio</a>
+    <a href="#/proyectos" tabindex="-1" style="transition-delay:.11s"><span>02</span>Proyectos</a>
+    <a href="#/servicios" tabindex="-1" style="transition-delay:.16s"><span>03</span>Servicios</a>
+    <a href="#/estudio" tabindex="-1" style="transition-delay:.21s"><span>04</span>Estudio</a>
+    <a href="#/proceso" tabindex="-1" style="transition-delay:.26s"><span>05</span>Proceso</a>
+    <a href="#/precios" tabindex="-1" style="transition-delay:.31s"><span>06</span>Inversión</a>
+    <a href="#/cotizar" tabindex="-1" style="transition-delay:.36s"><span>07</span>Cotizador</a>
+    <a href="#/contacto" tabindex="-1" style="transition-delay:.41s"><span>08</span>Contacto</a>
   </nav>
   <div class="menu__foot">
     <div class="rule"></div>
@@ -86,7 +86,7 @@
 
     <div class="hero__inner container">
       <h1 class="hero__title">
-        <span class="hero__word" data-letters aria-label="PazBel">PAZBEL</span>
+          <span class="hero__word" data-letters role="text" aria-label="PazBel">PAZBEL</span>
         <span class="hero__sub" aria-hidden="true"><i></i>Studios<i></i></span>
       </h1>
 
@@ -178,6 +178,22 @@
           <div class="proj__meta"><div><div class="proj__name">MOVA</div><div class="proj__cat">Educación · Plataforma digital · Caso del sitio</div></div><span class="proj__arrow" aria-hidden="true">↗</span></div>
         </a>
       </div>
+      <section class="home-project-directory" aria-labelledby="homeDirectoryHeading">
+        <div class="home-project-directory__head"><h3 id="homeDirectoryHeading">Explora los proyectos</h3><a href="#/proyectos" class="link-arrow">Archivo completo · 23 casos ↗</a></div>
+        <ul class="home-project-directory__links">
+          <li><a class="home-project-directory__name" href="#/proyectos/avila-parfums">Ávila Parfums <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://www.avilaparfums.com/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+          <li><a class="home-project-directory__name" href="#/proyectos/dual-ingenieria">Dual Ingeniería <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://www.dualingenieria.pe/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+          <li><a class="home-project-directory__name" href="#/proyectos/mova">MOVA <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://movaeduca.me/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+          <li><a class="home-project-directory__name" href="#/proyectos/cruzial-parfums">Cruzial Parfums <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://cruzial.pe/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+          <li><a class="home-project-directory__name" href="#/proyectos/talentlens">TalentLens · SmartRH AI <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://talentlens-nu.vercel.app/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+          <li><a class="home-project-directory__name" href="#/proyectos/jna-fragance">JNA Fragance <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://jnafragance.com/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+          <li><a class="home-project-directory__name" href="#/proyectos/elixia-parfum">Elixia Parfum <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://elixiaparfum.com/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+          <li><a class="home-project-directory__name" href="#/proyectos/fragance-obsession">Fragance Obsession <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://www.fraganceobession.com/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+          <li><a class="home-project-directory__name" href="#/proyectos/goccta">GOCCTA <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://www.gocctaperu.com/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+          <li><a class="home-project-directory__name" href="#/proyectos/hoppercode">HopperCode <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://hoppercode.vercel.app/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+          <li><a class="home-project-directory__name" href="#/proyectos/dra-blue">Dra. Blue <span>Ver ficha ↗</span></a><a class="home-project-directory__site" href="https://dentista-three-mu.vercel.app/" target="_blank" rel="noopener noreferrer">Sitio público ↗</a></li>
+        </ul>
+      </section>
       <p class="disclaimer" style="margin-top:34px">
         Las portadas archivadas de proyectos se muestran con su procedencia. Cuando no existe captura pública, se indica «Visual conceptual».
         La pertenencia al portafolio de un integrante no acredita por sí sola un encargo comercial de PazBel.
@@ -194,7 +210,7 @@
           <p class="body-copy">Del concepto a la interfaz: un pequeño ensayo visual producido con imágenes verificadas del portafolio. Sin audio, sin stock y sin reproducirse solo.</p>
           <button type="button" class="btn film-control" id="filmToggle" aria-pressed="false">Reproducir pieza <span aria-hidden="true">↗</span></button>
         </div>
-        <div class="film-frame" data-reveal="clip"><video id="filmVideo" playsinline muted preload="none" poster="assets/motion/showreel-poster.webp" aria-label="Showreel visual de Ávila Parfums y Dual Ingeniería"><source src="assets/motion/showreel.webm" type="video/webm"></video>
+        <div class="film-frame" data-reveal="clip"><video id="filmVideo" playsinline muted preload="none" poster="assets/motion/showreel-poster.webp" role="img" aria-label="Showreel visual de Ávila Parfums y Dual Ingeniería"><source src="assets/motion/showreel.webm" type="video/webm"></video>
         <span class="film-frame__marker">PAZBEL / MOTION STUDY / 001</span></div>
       </div>
     </div>
@@ -320,7 +336,7 @@
     <div class="closer__inner container">
       <span class="eyebrow" data-reveal>06 — Siguiente paso</span>
       <h2 class="closer__title" data-split>¿Construimos algo que valga la pena recordar?</h2>
-      <p class="lede" style="text-align:center;max-width:48ch" data-reveal style="--d:.1s">
+      <p class="lede" style="text-align:center;max-width:48ch;--d:.1s" data-reveal>
         Cuéntanos qué tienes en mente. Respondemos con una primera lectura honesta del proyecto —
         sin plantillas y sin discurso de ventas.
       </p>
@@ -366,7 +382,7 @@
       <p>Filtra por especialidad, busca un proyecto o cambia la presentación de la galería.</p>
     </div>
     <div class="portfolio-tools">
-      <label class="portfolio-search" for="projectSearch">
+      <label class="portfolio-search">
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
         <input id="projectSearch" type="search" placeholder="Buscar proyecto, sector o tecnología..." autocomplete="off" aria-label="Buscar en el archivo de proyectos">
         <span class="portfolio-search__key" aria-hidden="true">↵</span>
@@ -387,7 +403,7 @@
     <div class="work-grid portfolio-grid" id="workGrid"></div>
     <div class="portfolio-empty" id="projectEmpty" hidden><span class="portfolio-empty__symbol" aria-hidden="true">∅</span><h3>No hay coincidencias.</h3><p>Prueba otra palabra o cambia los filtros para descubrir más trabajos.</p><button id="projectEmptyReset" type="button" class="btn">Ver todos los proyectos ↗</button></div>
     <div class="portfolio-pagination"><p id="projectSummary" aria-live="polite"></p><button id="projectMore" class="portfolio-more" type="button" hidden>Mostrar más proyectos ↓</button></div>
-    <aside class="portfolio-note"><span>NOTA EDITORIAL</span><p>Las imágenes identificadas como «captura archivada» proceden del portafolio; pueden diferir de la versión actual. Los proyectos sin material visual público muestran composiciones conceptuales. No todos los trabajos son encargos comerciales de PazBel.</p></aside>
+    <aside class="portfolio-note" aria-label="Procedencia de los proyectos"><span>NOTA EDITORIAL</span><p>Las imágenes identificadas como «captura archivada» proceden del portafolio; pueden diferir de la versión actual. Los proyectos sin material visual público muestran composiciones conceptuales. No todos los trabajos son encargos comerciales de PazBel.</p></aside>
     <div class="portfolio-outro"><span>¿El próximo proyecto?</span><h2>Podría ser <em>el tuyo.</em></h2><a href="#/contacto" class="btn magnetic">Hablemos de tu idea <span aria-hidden="true">↗</span></a></div>
   </section>
 </section>
@@ -407,6 +423,7 @@
         <span class="eyebrow" id="pdCat">—</span>
         <h1 class="pd-title" id="pdName" style="margin-top:16px">—</h1>
         <p class="pd-tagline" id="pdTag">—</p>
+        <a id="pdTopLink" class="pd-top-live" href="#/proyectos" target="_blank" rel="noopener noreferrer" hidden>Visitar sitio público <span aria-hidden="true">↗</span></a>
       </div>
       <span class="eyebrow" id="pdYear" style="color:var(--violet)">—</span>
     </div>
@@ -494,12 +511,12 @@
     <div class="acc" id="servicesAcc">
 
       <div class="acc__item">
-        <button class="acc__btn" aria-expanded="false">
+        <button class="acc__btn" type="button" aria-expanded="false">
           <span class="acc__n">01</span>
           <span class="acc__t">Diseño web &amp; dirección de arte</span>
           <span class="acc__ico" aria-hidden="true"></span>
         </button>
-        <div class="acc__panel"><div>
+        <div class="acc__panel" inert aria-hidden="true"><div>
           <div class="acc__inner">
             <p>Interfaces con criterio editorial: jerarquía, tipografía, ritmo y espacio negativo.
               Diseñamos sistemas, no pantallas sueltas — para que el sitio siga siendo coherente
@@ -519,12 +536,12 @@
       </div>
 
       <div class="acc__item">
-        <button class="acc__btn" aria-expanded="false">
+        <button class="acc__btn" type="button" aria-expanded="false">
           <span class="acc__n">02</span>
           <span class="acc__t">Desarrollo de sitios corporativos</span>
           <span class="acc__ico" aria-hidden="true"></span>
         </button>
-        <div class="acc__panel"><div>
+        <div class="acc__panel" inert aria-hidden="true"><div>
           <div class="acc__inner">
             <p>Sitios rápidos, accesibles y mantenibles. Código propio, sin capas innecesarias
               de plugins. La misma obsesión que ponemos en el diseño, aplicada al rendimiento.</p>
@@ -540,12 +557,12 @@
       </div>
 
       <div class="acc__item">
-        <button class="acc__btn" aria-expanded="false">
+        <button class="acc__btn" type="button" aria-expanded="false">
           <span class="acc__n">03</span>
           <span class="acc__t">Tiendas virtuales</span>
           <span class="acc__ico" aria-hidden="true"></span>
         </button>
-        <div class="acc__panel"><div>
+        <div class="acc__panel" inert aria-hidden="true"><div>
           <div class="acc__inner">
             <p>Comercio donde la marca no se pierde en el checkout. Catálogos que se navegan
               con gusto y un proceso de compra que no pide paciencia.</p>
@@ -561,12 +578,12 @@
       </div>
 
       <div class="acc__item">
-        <button class="acc__btn" aria-expanded="false">
+        <button class="acc__btn" type="button" aria-expanded="false">
           <span class="acc__n">04</span>
           <span class="acc__t">Software a medida</span>
           <span class="acc__ico" aria-hidden="true"></span>
         </button>
-        <div class="acc__panel"><div>
+        <div class="acc__panel" inert aria-hidden="true"><div>
           <div class="acc__inner">
             <p>Cuando el proceso no cabe en ninguna herramienta existente, se construye.
               Paneles, portales, integraciones y lógica de negocio hecha a la medida exacta.</p>
@@ -582,12 +599,12 @@
       </div>
 
       <div class="acc__item">
-        <button class="acc__btn" aria-expanded="false">
+        <button class="acc__btn" type="button" aria-expanded="false">
           <span class="acc__n">05</span>
           <span class="acc__t">Automatización de procesos</span>
           <span class="acc__ico" aria-hidden="true"></span>
         </button>
-        <div class="acc__panel"><div>
+        <div class="acc__panel" inert aria-hidden="true"><div>
           <div class="acc__inner">
             <p>Las tareas repetitivas son un impuesto silencioso. Identificamos dónde se pierde
               tiempo y lo convertimos en flujo automático, con trazabilidad.</p>
@@ -603,12 +620,12 @@
       </div>
 
       <div class="acc__item">
-        <button class="acc__btn" aria-expanded="false">
+        <button class="acc__btn" type="button" aria-expanded="false">
           <span class="acc__n">06</span>
           <span class="acc__t">Experiencias digitales &amp; crecimiento</span>
           <span class="acc__ico" aria-hidden="true"></span>
         </button>
-        <div class="acc__panel"><div>
+        <div class="acc__panel" inert aria-hidden="true"><div>
           <div class="acc__inner">
             <p>Motion, interacción y narrativa por scroll cuando aportan algo. Y después:
               contenido, posicionamiento y datos para que la experiencia llegue a alguien.</p>
@@ -638,7 +655,7 @@
 <section class="view" data-view="servicio" id="view-servicio" hidden>
 <header class="page-head container"><a href="#/servicios" class="eyebrow" style="display:inline-block;margin-bottom:22px">↖ Todos los servicios</a><span class="eyebrow" id="srvIndex">01 — Capacidad</span><h1 class="page-head__title" id="srvTitle">Servicio</h1><div class="page-head__row"><p class="lede" id="srvLead"></p></div></header>
 <div class="container service-detail"><div class="service-detail__side"><div class="service-detail__orb" aria-hidden="true"><div></div><span id="srvSymbol">PB/01</span></div><p class="eyebrow">Diseño con intención. Tecnología con criterio.</p></div><div class="service-detail__body">
-<span class="sec-num">El enfoque</span><h2 class="display display--lg" id="srvStatement"></h2><p class="body-copy" id="srvBody"></p>
+<span class="sec-num">El enfoque</span><h2 class="display display--lg" id="srvStatement">Diseño con intención, ejecución con criterio.</h2><p class="body-copy" id="srvBody"></p>
 <div class="rule" style="margin:42px 0"></div><span class="sec-num">Lo que puede incluir</span><ul class="service-detail__deliver" id="srvBullets"></ul>
 <div class="closer__cta" style="justify-content:flex-start;margin-top:46px"><a class="btn" href="#/cotizar">Empezar con una idea ↗</a><a class="btn btn--ghost" href="#/proyectos">Ver trabajos</a></div>
 </div></div></section>
@@ -763,8 +780,8 @@
      VIEW: PRECIOS
      ============================================================ -->
 <section class="view" data-view="precios" id="view-precios" hidden>
-<header class="page-head container"><span class="eyebrow">Inversión & continuidad</span><h1 class="page-head__title" data-split>Hagamos que<br>valga la pena.</h1><div class="page-head__row"><p class="lede">Una base clara para hablar de inversión. El alcance final se define después de entender tu proyecto.</p></div></header>
-<div class="container"><div class="blueprint-sequence" aria-label="Visualización del proceso del plano al producto">
+<header class="page-head container"><span class="eyebrow">Inversión &amp; continuidad</span><h1 class="page-head__title" data-split>Hagamos que<br>valga la pena.</h1><div class="page-head__row"><p class="lede">Una base clara para hablar de inversión. El alcance final se define después de entender tu proyecto.</p></div></header>
+<div class="container"><div class="blueprint-sequence" role="img" aria-label="Visualización del proceso del plano al producto">
    <div class="blueprint-sequence__copy"><span class="eyebrow">Del plano a la obra</span><h2 class="display display--lg">Primero entendemos.<br>Después <em>construimos.</em></h2><p class="body-copy">Del primer trazo al software funcionando. Una idea que evoluciona paso a paso, con decisiones visibles.</p></div>
    <div class="blueprint-sequence__visual" aria-hidden="true">
     <span class="bp-corner bp-corner--a"></span><span class="bp-corner bp-corner--b"></span>
@@ -801,7 +818,7 @@
 
   <div class="container" style="padding-bottom:clamp(60px,10vh,120px)">
     <div class="quote">
-      <form id="quoteForm" novalidate>
+      <div id="quoteForm">
         <!-- Tipo -->
         <div class="qblock">
           <div class="qblock__t"><span>01</span><b>Tipo de proyecto</b></div>
@@ -876,10 +893,10 @@
             </label>
           </div>
         </div>
-      </form>
+      </div>
 
       <!-- Resumen -->
-      <aside class="qsummary" aria-live="polite">
+      <aside class="qsummary" aria-label="Resumen de cotización" aria-live="polite">
         <div class="qsum__label">Base referencial de desarrollo</div>
         <div class="qsum__amount" id="qAmount">S/ 89</div>
         <p class="qsum__note">Importes de partida según el catálogo del proyecto. No incluye impuestos ni módulos adicionales; el precio final requiere una propuesta personalizada.</p>
@@ -954,7 +971,7 @@
         </button>
       </form>
 
-      <aside>
+      <aside aria-label="Información de contacto">
         <div class="pd-features" style="margin-top:0;grid-template-columns:1fr">
           <div class="pd-feature">
             <span>Qué pasa después</span>
@@ -1026,8 +1043,8 @@
   <div class="demo__panel" role="group" aria-label="Panel de demostración">
     <div class="demo__h">Panel de demostración<br>No forma parte del sitio</div>
     <div class="demo__row">
-      <button class="demo__btn" id="dRestart">↻ Reiniciar hero</button>
-      <button class="demo__btn on" id="dMotion">Animaciones: ON</button>
+      <button class="demo__btn" id="dRestart" type="button">↻ Reiniciar hero</button>
+      <button class="demo__btn on" id="dMotion" type="button">Animaciones: ON</button>
     </div>
     <div class="demo__sep"></div>
     <div class="demo__h" style="margin-bottom:8px">Ir a vista</div>
@@ -1044,7 +1061,7 @@
       <a href="#/contacto" class="demo__btn">Contacto</a>
     </div>
   </div>
-  <button class="demo__toggle" id="demoToggle" aria-expanded="false">
+  <button class="demo__toggle" id="demoToggle" type="button" aria-expanded="false">
     <i></i> Demo
   </button>
 </div>

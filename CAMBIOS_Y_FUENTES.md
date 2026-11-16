@@ -1,5 +1,7 @@
 # PazBel Studios — Decisiones de diseño y evidencia
 
+> **Estado vigente (15/11/2026):** la versión mantenida es el sitio estático HTML/CSS/JavaScript con 23 proyectos. Las notas históricas que mencionan 14 proyectos describen un estado anterior y no el archivo actual. Auditoría técnica, correcciones, límites y pruebas de la versión vigente: [QA_FINAL.md](QA_FINAL.md).
+
 ## Refinamiento UX/UI del 15 de noviembre de 2026
 
 - Se conservaron el Hero tipográfico centrado, el campo de luz, el fondo atmosférico y el tratamiento editorial aprobado.

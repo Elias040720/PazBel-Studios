@@ -1,0 +1,31 @@
+{
+  "name": "pazbel-studios-static",
+  "version": "1.0.0",
+  "description": "**Propuesta de diseño y desarrollo (HTML + CSS + JavaScript, sin compilación).**",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "test": "node --test-concurrency=1 tests/index.test.cjs",
+    "test:unit": "node --test tests/site-integrity.test.cjs",
+    "test:e2e": "node --test tests/browser.test.cjs",
+    "check": "node --check app.js && npm run test",
+    "lint:html": "html-validate index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elias040720/PazBel-Studios.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Elias040720/PazBel-Studios/issues"
+  },
+  "homepage": "https://github.com/Elias040720/PazBel-Studios#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "axe-core": "^4.14.0",
+    "html-validate": "^11.21.1",
+    "parse5": "^8.1.1"
+  }
+}

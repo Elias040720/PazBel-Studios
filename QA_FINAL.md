@@ -1,39 +1,56 @@
-# Informe de QA final — PazBel Studios
+# Auditoría técnica, UX/UI y publicación — PazBel Studios
 
-Fecha: 15 de noviembre de 2026. Entorno: Windows, Chromium 1248 headless, archivo temporal combinado para respetar el acceso `file://` del sitio estático.
+**Fecha:** 15 de noviembre de 2026
+**Carpeta oficial trabajada:** `C:\Users\ABEL\Downloads\PazBel_Studios_Portafolio_23_Proyectos_UXUI\PazBel_Studios`
+**Arquitectura:** sitio estático HTML5, CSS3 y JavaScript; navegación hash; Canvas; sin dependencias de producción.
 
-## Cambios realizados
+## Hallazgos y correcciones
 
-- Se retiraron del Hero la cápsula de estudio y ubicación, el punto turquesa, sus estilos y su animación.
-- Se retiraron “Desliza” y su línea animada; no se agregó otro indicador.
-- Se quitó el encabezado “01 — Manifiesto” y la regla. Se conserva el texto editorial con jerarquía natural.
-- Se eliminaron las tres estadísticas obsoletas y la nota explicativa de procedencia.
-- Se eliminó la barra de progreso global junto con el marcado, los estilos y su cálculo durante scroll. Se conserva el fondo y borde de la navegación al desplazarse.
-- El menú móvil devuelve el foco al botón al cerrarse y cierra al hacer clic en el backdrop. El listener del backdrop se instala y elimina en cada apertura/cierre.
+| Hallazgo reproducible | Causa | Corrección |
+|---|---|---|
+| Texto auxiliar y metadatos fallaban contraste en axe. | El token `--faint` usaba 34 % de opacidad sobre fondos oscuros; una etiqueta de proyecto estaba en `#727582`; los pasos de metodología se atenuaban al 38 %. | Se elevó `--faint` al 58 %, el texto secundario a `#8b8e99` y se retiró la opacidad que atenuaba contenido legible. El campo oscuro, los colores de marca y el Hero aprobado se conservaron. |
+| Axe encontraba seis enlaces enfocables dentro de paneles de acordeón con `aria-hidden="true"`. | Los paneles se cerraban visualmente y se ocultaban al árbol accesible, pero no se excluían del orden de tabulación. | Los paneles cerrados empiezan en `inert`; al abrir se actualizan `inert`, `aria-hidden` y `aria-expanded` juntos. |
+| Los enlaces del menú cerrado podían aparecer en el análisis estático como contenido oculto enfocable. | El estado `aria-hidden` no cambiaba por sí solo la tabulación del navegador. | Los enlaces del menú usan `tabindex="-1"` cerrado y recuperan su orden normal al abrir; Escape y clic en el fondo devuelven el foco al botón. |
+| La validación HTML detectó un atributo `style` duplicado, tipos omitidos en botones, un `for` redundante, un título dinámico vacío y un formulario de cotización sin acción de envío. | Marcado residual y controles interactivos con semántica innecesaria o incompleta. | Se corrigió el atributo duplicado, se tiparon los botones, se eliminó el `for` redundante, se dio texto inicial al título y el cotizador pasó a contenedor no enviable; su cálculo y selección se mantienen. |
+| Las capturas archivadas eran inconsistentes y faltaban copias actuales; dos direcciones del inventario no eran adecuadas para mostrar como sitios públicos. | DPP abre una pantalla privada de acceso; la dirección de Murex muestra una marca distinta. | Se tomaron y revisaron 22 capturas actuales (11 sitios, escritorio y móvil), guardadas en `assets/portfolio/actuales/`. DPP y Murex quedan sin enlace externo y con visual conceptual identificado. Se añadieron fallbacks en orden: captura actual, archivo disponible y concepto. |
+
+La discrepancia «Gimnasio Murex» frente a la captura archivada de «Gimnasio Lima» permanece documentada en el registro del proyecto; no se fusionaron nombres ni se afirmó una identidad comercial sin confirmación. No se cambiaron tarifas ni se enviaron comunicaciones reales por WhatsApp.
+
+El Hero cinematográfico aprobado se conservó. En Inicio se añadió una guía visible de los 11 sitios públicos confirmados con enlaces separados a la ficha y al sitio. Las animaciones de entrada son decorativas: el CSS deja texto e imágenes visibles por defecto, y los reveals solo añaden una animación sutil cuando pueden ejecutarse.
 
 ## Verificaciones ejecutadas
 
-| Área | Resultado | Evidencia |
-|---|---|---|
-| Sintaxis JavaScript | PASS — `node --check app.js` | Sin salida de error |
-| Portafolio | PASS — 23 slugs únicos; 3 destacados y 9 fichas iniciales | Datos de `app.js`; flujo Chromium |
-| Búsqueda | PASS — HopperCode devuelve un resultado; vacío muestra estado y restablecimiento | Chromium |
-| Filtros, orden, vista y paginación | PASS — A–Z empieza por Ávila Parfums; lista se activa; Mostrar más aumenta de 9 a 18 | Chromium |
-| Detalle de proyecto | PASS — HopperCode conserva navegación atrás y adelante | Chromium |
-| Detalle de servicio | PASS — la ruta `#/servicios/desarrollo-web` abre la plantilla individual sin errores | Chromium |
-| Cotizador | PASS — base cambia de S/ 89 a “A cotizar · base S/ 1,200” al elegir e-commerce y módulo CMS | Chromium |
-| Validación de contacto | PASS — se muestran errores para nombre, correo y mensaje inválidos | Chromium, valores sintéticos; no se abrió ni envió WhatsApp |
-| Overflow horizontal | PASS — 320, 360, 375, 390, 430, 768, 1024, 1280, 1440 y 1920 px; `scrollWidth == clientWidth` | Chromium |
-| Errores JavaScript | PASS en recorridos principales; cero excepciones registradas | Chromium |
-| Elementos solicitados | PASS — no quedan textos, IDs ni selectores dedicados en HTML/CSS/JS | Búsqueda estática |
+- `node --check app.js`: aprobado.
+- `npm run lint:html` con `html-validate`: aprobado. Se conserva el estilo de etiquetas vacías existente y los estilos inline usados para valores/delays visuales; esas dos reglas están excluidas explícitamente del validador.
+- `npm test`: 17 subpruebas aprobadas, incluyendo 23 proyectos, los 11 enlaces públicos, los conceptos privados, fallback sin `IntersectionObserver`, controles del portafolio, rutas de fichas, filtros, búsqueda, vistas, paginación, cotizador, contacto/WhatsApp, menú y navegación.
+- `npm run test:e2e`: 10 pruebas de navegador aprobadas con Edge/Chromium; además de controles y rutas, se verificó fallback sin red, Home en móvil, proyectos conceptuales y cero errores JavaScript en flujos locales.
+- axe-core: cero hallazgos automatizados WCAG en Inicio, Archivo, detalle de proyecto, Servicios, detalle de servicio, Estudio, Metodología, Inversión, Cotizador y Contacto. Esto no constituye certificación WCAG.
+- Responsive: las diez vistas principales se midieron a 320, 360, 375, 390, 430, 768, 1024, 1280, 1440 y 1920 px en Chromium, Firefox y WebKit; también se comprobó el ancho CSS de 640 px, equivalente aproximado al espacio disponible en escritorio de 1280 px con zoom de navegador al 200 %. No hubo overflow horizontal ni errores JavaScript.
+- Movimiento reducido: las pruebas de navegador se ejecutaron con `prefers-reduced-motion: reduce`; existe una regla CSS específica para reducir movimiento.
+- `npm audit`: cero vulnerabilidades reportadas en dependencias de prueba. No hay dependencias de runtime para el sitio.
+- `git diff --check`: aprobado.
+- Navegación con la red externa bloqueada: las 23 tarjetas terminan con una imagen local válida.
 
-Las capturas reales están en `previews/hero-escritorio-final.png`, `previews/hero-movil-final.png`, `previews/portafolio-escritorio-final.png`, `previews/detalle-proyecto-final.png`, `previews/servicios-final.png`, `previews/metodologia-final.png`, `previews/precios-final.png`, `previews/cotizador-final.png` y `previews/contacto-final.png`.
+## Revisión visual
 
-## Pendientes y límites reales
+Se capturaron las pantallas de las páginas públicas actuales con Playwright/Edge, en escritorio (1440 × 900) y móvil (390 × 844), revisando cada imagen. El inventario, los hallazgos de sitios externos y los nombres de archivo están en [CAPTURAS_Y_ENLACES.md](CAPTURAS_Y_ENLACES.md). También se conserva la revisión visual previa con capturas y un recorrido breve.
 
-- No se ejecutó zoom 200 %, pruebas en dispositivos físicos, Firefox/WebKit, lector de pantalla, Lighthouse ni medición de Core Web Vitals.
-- No se verificó disponibilidad de enlaces/demo externos en producción ni las fuentes remotas en una red pública.
-- No se probaron envíos a WhatsApp para no iniciar una comunicación externa.
-- El clic en backdrop y retorno de foco se revisaron en código, pero no se repitieron como interacción automatizada.
-- El workspace entregado no contiene `.git`; no fue posible crear rama ni commit sin inventar historial.
-- No se incluyó video. No hubo push, merge ni despliegue.
+- Antes del último refinamiento: [Hero escritorio](previews/hero-escritorio.webp).
+- Después: [Hero escritorio](previews/hero-escritorio-final.png), [Hero móvil](previews/hero-movil-final.png), [Archivo escritorio](previews/portafolio-escritorio-final.png), [Archivo móvil](previews/portafolio-movil-final.png).
+- Recorrido: [Video QA](previews/recorrido-qa.webm).
+
+La revisión visual confirma que el título PAZBEL centrado, la atmósfera oscura, el campo de luz, la paleta y las llamadas a la acción siguen intactos. El Hero no se rediseñó. El archivo mantiene sus controles. Hallazgo externo: GOCCTA recorta contenido en su propia página a 390 px; se conserva su captura móvil como evidencia y se usa la vista de escritorio en la ficha.
+
+## Rendimiento, seguridad y límites
+
+HTML, CSS y JavaScript pesan aproximadamente 206 KB sin comprimir; los assets locales previos sumaban 1.01 MB. Las 22 nuevas capturas JPEG ocupan 2.01 MB. No medí LCP, CLS o INP en producción, ni el costo de CPU en equipos de gama baja. Tampoco ejecuté Lighthouse, un lector de pantalla real, dispositivos físicos ni una conexión móvil limitada. Se validaron las rutas de WhatsApp con datos sintéticos interceptando `window.open`, sin abrir la URL ni mandar mensajes.
+
+La prueba de secretos cubre patrones comunes en el HTML y JavaScript del sitio; no sustituye un escáner de secretos de todo el historial Git. Los sitios externos y los nombres/atribuciones comerciales aún requieren confirmación humana. La revisión automática cubre contraste de texto, teclado y estructura principal, pero no afirma cumplimiento WCAG 2.2 AA total.
+
+## Git, publicación y CI
+
+El pull request se preparó sobre el SHA remoto `22635d096144cae1af651b10d4dcb2afaf6526d0`, sin reescribir historia. Se añade GitHub Actions para pull requests y pushes a `main`: valida JavaScript, HTML, rutas/funciones, responsive, axe y `npm audit`. El workflow no despliega el sitio.
+
+GitNexus actualizó el índice a 242 nodos, 597 aristas y 18 flujos. `detect-changes --scope all` marcó riesgo medio por los cambios del flujo de menú (un proceso afectado). El análisis advierte que 28 puntos de entrada no se trazaron y 119 llamadas se omitieron por límite de ramificación; esa cobertura parcial no se interpreta como prueba de ausencia de otros flujos.
+
+CI remoto para `3930f28c0011897f9b81c9db087f42ae87e4aa33`: aprobado en la ejecución 43774235697 (12 subpruebas; matriz Chromium, Firefox y WebKit; `npm audit` sin vulnerabilidades). Pull request #1: https://github.com/Elias040720/PazBel-Studios/pull/1, abierto y mergeable; base `main` permanece en `22635d096144cae1af651b10d4dcb2afaf6526d0`. El chequeo automático de vista previa de Vercel falla; la cuenta conectada no tiene acceso al equipo que muestra los registros (403). Para respetar el límite de no desplegar, no se integró a `main`; el PR queda listo para revisar cuando el propietario de Vercel resuelva ese fallo o confirme una ruta de integración que no active despliegue.

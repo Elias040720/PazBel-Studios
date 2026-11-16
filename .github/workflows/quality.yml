@@ -1,0 +1,38 @@
+name: Site quality checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-and-browser-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install test tools
+        run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Check JavaScript syntax
+        run: node --check app.js
+      - name: Validate HTML structure
+        run: npm run lint:html
+      - name: Run functional, responsive, and accessibility checks
+        run: npm test
+      - name: Check production dependency security
+        run: npm audit --omit=dev
