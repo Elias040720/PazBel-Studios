@@ -1114,3 +1114,32 @@ body.demo-mode .demo{display:block!important}
 
 .portfolio-hero__title[tabindex="-1"]:focus{outline:none!important}
 .portfolio-hero__title em{display:inline-block}
+
+/* Contenido visible por defecto: reveals animan la entrada, nunca el acceso al contenido. */
+@keyframes content-arrive{from{opacity:.86;transform:translateY(12px)}to{opacity:1;transform:none}}
+[data-reveal],[data-reveal="clip"],[data-reveal="scale"]{opacity:1;transform:none;clip-path:none}
+[data-reveal].is-in{animation:content-arrive .72s var(--ease) both}
+.mask>span,.w>span{transform:none}
+.mask.is-in>span,.is-in .w>span{animation:content-arrive .82s var(--ease) both}
+@media(prefers-reduced-motion:reduce){[data-reveal].is-in,.mask.is-in>span,.is-in .w>span{animation:none!important}}
+
+/* Current site captures are shown once, with an explicit visual placeholder on failure. */
+.art--photo{background-color:#141721;background-image:none!important}
+.art--photo.art--missing{display:grid;place-items:center;min-height:220px;background:linear-gradient(135deg,#171927,#0c0d14)}
+.art--photo.art--missing::before{display:grid;content:'PAZBEL  /  PROYECTO';place-items:center;position:absolute;inset:0;color:#9294a4;font:500 clamp(16px,3vw,30px) var(--sans);letter-spacing:.12em;pointer-events:none}
+.art__screenshot[hidden]{display:none!important}
+.pd-cover .art__tag{max-width:calc(100% - 28px)}
+.pd-top-live{display:inline-flex;gap:12px;align-items:center;margin-top:24px;padding:13px 18px;border:1px solid rgba(242,239,230,.32);border-radius:999px;color:var(--ink);font-weight:600;font-size:12px;letter-spacing:.04em;transition:background .25s,color .25s}
+.pd-top-live:hover{background:var(--ink);color:var(--bg)}
+.pd-top-live[hidden]{display:none!important}
+
+.home-project-directory{margin-top:clamp(35px,5vw,65px);border-top:1px solid var(--line);padding-top:clamp(25px,4vw,45px)}
+.home-project-directory__head{display:flex;flex-wrap:wrap;gap:18px;align-items:baseline;justify-content:space-between;margin-bottom:22px}
+.home-project-directory h3{font:300 clamp(24px,3vw,39px) var(--serif);letter-spacing:-.025em}
+.home-project-directory__links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.home-project-directory__links li{display:flex;align-items:center;justify-content:space-between;gap:14px;min-width:0;min-height:64px;padding:12px 0;border-bottom:1px solid var(--line)}
+.home-project-directory__links a{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;font-size:clamp(12px,1vw,15px);transition:color .25s}
+.home-project-directory__name{flex:1}
+.home-project-directory__name span,.home-project-directory__site{font:600 9px var(--sans);letter-spacing:.06em;white-space:nowrap;color:var(--cyan);text-transform:uppercase}
+.home-project-directory__links a:hover{color:var(--cyan)}
+@media(max-width:680px){.home-project-directory__links{grid-template-columns:1fr}.home-project-directory__links li{min-height:56px}.home-project-directory__links a{font-size:12px}}

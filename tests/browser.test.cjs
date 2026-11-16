@@ -81,6 +81,37 @@ test('portfolio images fall back locally when external capture hosts fail', asyn
   await page.close();
 });
 
+test('Home directory links all 11 public projects and handles browsers without reveal observers', async () => {
+  const { page, errors } = await open('#/');
+  const directory = page.locator('.home-project-directory');
+  assert.equal(await directory.locator('li').count(), 11);
+  assert.equal(await directory.locator('a.home-project-directory__name').count(), 11);
+  assert.equal(await directory.locator('a.home-project-directory__site').count(), 11);
+  await page.setViewportSize({ width: 390, height: 844 });
+  const widths = await directory.evaluate(el => ({ box: el.getBoundingClientRect().width, scroll: el.scrollWidth }));
+  assert.ok(widths.scroll <= widths.box, `Home directory fits mobile: ${JSON.stringify(widths)}`);
+  await page.close();
+
+  const fallback = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+  await fallback.addInitScript(() => { window.IntersectionObserver = undefined; });
+  await fallback.goto(entry);
+  assert.equal(await fallback.locator('.hero__title').evaluate(el => getComputedStyle(el).opacity), '1');
+  assert.equal(await fallback.locator('.home-project-directory').evaluate(el => getComputedStyle(el).opacity), '1');
+  assert.deepEqual(errors, []);
+  await fallback.close();
+});
+
+test('public detail exposes the live link while private and unconfirmed cases remain conceptual', async () => {
+  for (const [slug, shouldLink] of [['mova', true], ['dpp-control', false], ['murex', false]]) {
+    const { page, errors } = await open(`#/proyectos/${slug}`);
+    const link = page.locator('#pdTopLink');
+    assert.equal(await link.isVisible(), shouldLink, `${slug} public-link visibility`);
+    assert.equal(await page.locator('#pdCover .art__tag').innerText().then(text => text.toLowerCase().includes('conceptual')), !shouldLink, `${slug} image provenance`);
+    await page.close();
+    assert.deepEqual(errors, [], `${slug} console errors`);
+  }
+});
+
 test('quote options produce honest base estimates and pass the selection into contact', async () => {
   const { page, errors } = await open('#/cotizar');
   const cases = [['landing', '89'], ['corporativo', '499'], ['ecommerce', '1,200'], ['plataforma', '1,890']];

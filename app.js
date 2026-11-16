@@ -229,15 +229,15 @@
         "cat": "software",
         "art": "murex",
         "tagline": "Una experiencia pensada para el movimiento.",
-        "image": "assets/portfolio/capturas/murex.png",
-        "href": "https://gimnasio-murex.vercel.app",
+        "image": "assets/portfolio/conceptos/murex.webp",
+        "href": null,
         "origin": "Proyecto de integrante / referencia",
         "year": "Portafolio",
         "role": "Proyecto de integrante / referencia",
         "context": "Web pública presentada en el portafolio como Gimnasio Lima; figura en el listado de PazBel como Gimnasio Murex. Confirmar denominación comercial antes de publicar.",
         "challenge": "Comprender la necesidad del usuario y definir un flujo digital claro, acorde al alcance de este proyecto.",
         "solution": "Sistema de gestión de membresías, reservas y asistencia.",
-        "solution2": "Se utiliza el material archivado del portafolio personal. La imagen del sitio lleva el nombre Gimnasio Lima, no Murex.",
+        "solution2": "La dirección revisada muestra un sitio llamado Gimnasio Lima; su relación con Murex no está confirmada. Esta portada es conceptual.",
         "features": [
             "Fitness · Membresías",
             "Diseño orientado a la experiencia",
@@ -246,10 +246,9 @@
         "stack": [
             "Información técnica por verificar"
         ],
-        "previewRemote": "https://raw.githubusercontent.com/Abel-Castill0/Portafolio/main/public/previews/gym.png",
         "fallbackImage": "assets/portfolio/conceptos/murex.webp",
-        "imageKind": "archive",
-        "imageLabel": "Captura archivada · Gimnasio Lima (denominación por confirmar)"
+        "imageKind": "concept",
+        "imageLabel": "Visual conceptual · Identidad por confirmar"
     },
     {
         "slug": "jna-fragance",
@@ -316,15 +315,15 @@
         "cat": "software",
         "art": "dpp",
         "tagline": "Una visión más clara de cada operación.",
-        "image": "assets/portfolio/capturas/dpp-control.png",
-        "href": "https://dpp-pink.vercel.app/login",
+        "image": "assets/portfolio/conceptos/dpp-control.webp",
+        "href": null,
         "origin": "Proyecto de integrante / referencia",
         "year": "Portafolio",
         "role": "Proyecto de integrante / referencia",
         "context": "Panel operativo para indicadores, caja, órdenes y reportes.",
         "challenge": "Comprender la necesidad del usuario y definir un flujo digital claro, acorde al alcance de este proyecto.",
         "solution": "Panel operativo para indicadores, caja, órdenes y reportes.",
-        "solution2": "El enlace público conduce al acceso del sistema. La imagen local es conceptual hasta obtener una captura auténtica autorizada de una vista pública.",
+        "solution2": "La dirección revisada conduce al acceso privado del sistema. Se muestra una portada conceptual; no hay una vista pública confirmada.",
         "features": [
             "Operaciones · Indicadores",
             "Diseño orientado a la experiencia",
@@ -333,8 +332,8 @@
         "stack": [
             "Información técnica por verificar"
         ],
-        "imageKind": "optional-live",
-        "imageLabel": "Vista pública del acceso",
+        "imageKind": "concept",
+        "imageLabel": "Visual conceptual · Acceso privado",
         "fallbackImage": "assets/portfolio/conceptos/dpp-control.webp"
     },
     {
@@ -867,11 +866,18 @@
         revealIO.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  }, { threshold: 0.01, rootMargin: '80px 0px 60px 0px' });
 
   function observeReveals(root){
     $$('[data-reveal], .mask, [data-split]', root || document).forEach(el => {
-      if (!el.classList.contains('is-in')) revealIO.observe(el);
+      if (el.classList.contains('is-in')) return;
+      revealIO.observe(el);
+      // Reveal elements already in view on route changes, even if the observer misses them.
+      const r=el.getBoundingClientRect();
+      if(r.width && r.height && r.top < innerHeight+30 && r.bottom > -30){
+        el.classList.add('is-in');
+        revealIO.unobserve(el);
+      }
     });
   }
 
@@ -1224,11 +1230,7 @@
     if (viewEl){
       prepareSplits(viewEl);
       // re-observar (por si el observer no reevaluó)
-      setTimeout(() => {
-        $$('[data-reveal], .mask, [data-split]', viewEl).forEach(el => {
-          if (!el.classList.contains('is-in')) revealIO.observe(el);
-        });
-      }, 60);
+      setTimeout(() => observeReveals(viewEl), 60);
     }
 
     // Foco accesible
@@ -1335,45 +1337,58 @@
   /* ============================================================
      PROYECTOS: GRID + FILTROS
      ============================================================ */
-  function artHTML(p, extraStyle){
-    // Las imágenes locales son prioritarias. Si aún no se descargaron, se intenta
-    // la captura pública archivada y, como último recurso, un arte conceptual marcado.
-    const stage = (p.imageKind === 'archive' || p.imageKind === 'optional-live') ? '0' : '2';
-    const verifiedClass = p.imageKind !== 'concept' ? ' art__tag--verified' : '';
-    const alt = p.imageKind === 'concept'
-      ? `Representación gráfica conceptual de ${p.name}, no es captura del sitio`
-      : `Vista del sitio ${p.name} documentada en el portafolio`;
-    return `<div class="art art--photo" style="background-image:url('${p.fallbackImage || p.image}');background-size:cover;background-position:center;${extraStyle || ''}">
-      <img class="art__screenshot" src="${p.image}" alt="${alt}" loading="lazy"
-           width="1080" height="550" data-stage="${stage}"
-           data-remote="${p.previewRemote || ''}" data-fallback="${p.fallbackImage || ''}">
-      <span class="art__tag${verifiedClass}">${p.imageLabel}</span></div>`;
+  // Orden de respaldo: captura actual revisada, archivo local/remoto y concepto etiquetado.
+  function projectImages(p){
+    const chain=[];
+    const add=(src,label,kind)=>{if(src && !chain.some(x=>x.src===src))chain.push({src,label,kind});};
+    if(p.href && /^https:\/\//.test(p.href)){
+      add(`assets/portfolio/actuales/${p.slug}.jpg`,'Captura actual del sitio · Revisada','live');
+    }
+    if(p.imageKind!=='concept') add(p.image,p.imageLabel || 'Captura archivada','archive');
+    if(p.previewRemote) add(p.previewRemote,'Captura archivada · Portafolio','archive');
+    add(p.fallbackImage || p.image,'Visual conceptual · No es captura del sitio','concept');
+    return chain;
   }
 
-  // Capturas provenientes del repositorio Portafolio; no dependen de backend.
-  // En local se intenta primero la copia incluida mediante PREPARAR_FOTOS.ps1.
+  function artHTML(p, extraStyle){
+    const sources=projectImages(p);
+    const first=sources[0];
+    const alt=first.kind==='concept'
+      ? `Visual conceptual de ${p.name}; no es captura de su sitio`
+      : `Captura de ${p.name}: ${first.label}`;
+    return `<div class="art art--photo" style="${escapeHTML(extraStyle || '')}">
+      <img class="art__screenshot" src="${escapeHTML(first.src)}" alt="${escapeHTML(alt)}" loading="lazy" decoding="async"
+           width="1440" height="900" data-photo-list="${escapeHTML(JSON.stringify(sources))}" data-photo-index="0">
+      <span class="art__tag${first.kind==='concept'?'':' art__tag--verified'}">${escapeHTML(first.label)}</span></div>`;
+  }
+
+  // A failed image advances through real captures before showing the labeled concept.
   document.addEventListener('error', ev=>{
     const img=ev.target;
-    if (!(img instanceof HTMLImageElement) || !img.classList.contains('art__screenshot')) return;
-    const stage=Number(img.dataset.stage || 0);
-    if(stage===0 && img.dataset.remote){
-      img.dataset.stage='1'; img.src=img.dataset.remote; return;
+    if(!(img instanceof HTMLImageElement) || !img.classList.contains('art__screenshot') || !img.dataset.photoList)return;
+    const list=JSON.parse(img.dataset.photoList || '[]');
+    const i=Number(img.dataset.photoIndex || 0)+1;
+    if(i < list.length){
+      img.dataset.photoIndex=String(i);
+      img.src=list[i].src;
+      return;
     }
-    if(stage<2 && img.dataset.fallback){
-      img.dataset.stage='2'; img.src=img.dataset.fallback;
-      const badge=img.parentElement?.querySelector('.art__tag');
-      if(badge){badge.classList.remove('art__tag--verified');badge.textContent='Visual conceptual · Captura no disponible';}
-      img.alt='Representación conceptual de proyecto, no es una captura actual';
-    }
+    img.hidden=true;
+    const badge=img.parentElement?.querySelector('.art__tag');
+    if(badge){badge.textContent='Imagen no disponible · Ver proyecto';badge.classList.remove('art__tag--verified');}
+    img.parentElement?.classList.add('art--missing');
   },true);
   document.addEventListener('load', ev=>{
     const img=ev.target;
-    if(!(img instanceof HTMLImageElement)||!img.classList.contains('art__screenshot')) return;
+    if(!(img instanceof HTMLImageElement)||!img.dataset.photoList)return;
+    const list=JSON.parse(img.dataset.photoList || '[]');
+    const current=list[Number(img.dataset.photoIndex||0)];
     const badge=img.parentElement?.querySelector('.art__tag');
-    if(!badge)return;
-    const stage=Number(img.dataset.stage||0);
-    if(stage===1){badge.textContent='Captura archivada · Portafolio';badge.classList.add('art__tag--verified');}
-    else if(stage===0){badge.textContent=img.dataset.remote ? 'Captura del sitio · Local' : 'Imagen del proyecto · Local';badge.classList.add('art__tag--verified');}
+    if(current && badge){
+      badge.textContent=current.label;
+      badge.classList.toggle('art__tag--verified',current.kind!=='concept');
+      if(current.kind==='concept')img.alt='Visual conceptual; no es captura del sitio';
+    }
   },true);
 
   /* ============================================================
@@ -1418,6 +1433,16 @@
       </div>
       ${isConcept ? '<span class="portfolio-card__kind">VISUAL CONCEPTUAL</span>' : ''}
     </article>`;
+  }
+
+  function initHomeProjectPhotos(){
+    // Reuse the same verified capture/fallback chain in the three Home spotlights.
+    $$('.featured-card').forEach(card=>{
+      const slug=(card.getAttribute('href')||'').split('/').pop();
+      const project=PROJECTS.find(p=>p.slug===slug);
+      const art=card.querySelector('.art');
+      if(project&&art)art.outerHTML=artHTML(project);
+    });
   }
 
   function initProjectsGrid(){
@@ -1518,6 +1543,9 @@
     const pdLink = $('#pdLink');
     pdLink.hidden = !p.href;
     if(p.href) pdLink.href = p.href;
+    const pdTopLink=$('#pdTopLink');
+    pdTopLink.hidden=!p.href;
+    if(p.href) pdTopLink.href=p.href;
 
     $('#pdContext').textContent = p.context;
     $('#pdChallenge').textContent = p.challenge;
@@ -1784,6 +1812,7 @@
     initTicker();
     initNav();
     initRouter();
+    initHomeProjectPhotos();
     initProjectsGrid();
     initAccordions();
     initProcess();

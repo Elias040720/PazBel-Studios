@@ -34,6 +34,36 @@ test('portfolio keeps 23 unique, complete project records and local image files'
   }
 });
 
+test('every confirmed public project has a reviewed local capture and private or mismatched URLs stay unlinked', () => {
+  const projects = projectRecords();
+  const publicProjects = projects.filter(project => project.href);
+  assert.equal(publicProjects.length, 11, 'only the 11 reviewed public sites have external links');
+  for (const project of publicProjects) {
+    assert.ok(fs.existsSync(path.join(root, 'assets/portfolio/actuales', `${project.slug}.jpg`)), `current screenshot exists for ${project.slug}`);
+  }
+  for (const slug of ['dpp-control', 'murex']) {
+    const project = projects.find(item => item.slug === slug);
+    assert.equal(project.href, null, `${slug} does not link to a login or unconfirmed identity`);
+    assert.equal(project.imageKind, 'concept', `${slug} is labeled as a concept`);
+  }
+});
+
+test('Home pairs every confirmed project page with its public website', () => {
+  const projects = projectRecords().filter(project => project.href);
+  assert.equal((html.match(/class="home-project-directory__name"/g) || []).length, projects.length);
+  assert.equal((html.match(/class="home-project-directory__site"/g) || []).length, projects.length);
+  for (const project of projects) {
+    assert.match(html, new RegExp(`href="#/proyectos/${project.slug}"`), `Home has a detail link for ${project.slug}`);
+    assert.ok(html.includes(project.href.replace(/\/$/, '')), `Home has the reviewed external URL for ${project.slug}`);
+  }
+});
+
+test('scroll reveal content is visible even when IntersectionObserver never fires', () => {
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(css, /\[data-reveal\],\[data-reveal="clip"\],\[data-reveal="scale"\]\{opacity:1;transform:none;clip-path:none\}/);
+  assert.match(css, /\.mask>span,\.w>span\{transform:none\}/);
+});
+
 test('HTML has unique IDs, working local anchors, and all core app assets', () => {
   const document = parse(html);
   const ids = new Map();
