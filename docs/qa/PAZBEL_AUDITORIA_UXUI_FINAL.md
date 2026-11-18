@@ -34,7 +34,7 @@ Se implementaron correcciones localizadas manteniendo el hero PAZBEL cinematogr�
 - `styles.css`: selector de movimiento reducido corregido, cabecera de servicio con separación responsive, objetivos de enlace de Inicio de al menos 44 px y ficha con una sola característica.
 - `tests/browser.test.cjs`, `tests/site-integrity.test.cjs`: pruebas de rutas, foco, menú, ausencia de IO, motion normal/reducido, controles del portafolio y contenido honesto.
 - `pazbel-qa-visual.cjs`: script de QA público adjunto, con soporte para ejecutable Chromium instalado, detección de recorte que ignora scrollers horizontales intencionales y 11 tamaños solicitados.
-- `package.json`: comando `npm run qa:public`.
+- `package.json`: comando`npm run qa:public`.
 - `.gitignore`: evidencia temporal local fuera del commit.
 
 ## Evidencia visual
@@ -65,7 +65,7 @@ Las capturas posteriores son de la app local ejecutada en Edge/Chromium con view
 
 | Verificación | Resultado |
 |---|---|
-| `npm test` (unitarias + navegador) | **PASS 24/24** |
+|`npm test` (unitarias + navegador) | **PASS 24/24** |
 | Navegación, filtros, búsqueda, orden, vista, Mostrar más y 23 rutas de proyecto | **PASS** |
 | Seis servicios, rutas rápidas e historial | **PASS** |
 | Cotizador y paso de selección a contacto | **PASS** |
@@ -76,10 +76,10 @@ Las capturas posteriores son de la app local ejecutada en Edge/Chromium con view
 | Movimiento reducido y texto/CTA del hero | **PASS** |
 | Matriz responsive local en Chromium, Firefox y WebKit; vistas principales en tamaños múltiples | **PASS** |
 | axe en vistas principales dentro de la suite | **PASS, sin hallazgos reportados por el test** |
-| `npm run test:unit` | **PASS 9/9** |
-| `npm run lint:html` | **PASS** |
-| `node --check app.js` y `node --check pazbel-qa-visual.cjs` | **PASS** |
-| `npm audit --omit=dev` | **PASS: 0 vulnerabilidades de dependencias de producción** |
+|`npm run test:unit` | **PASS 9/9** |
+|`npm run lint:html` | **PASS** |
+|`node --check app.js` y`node --check pazbel-qa-visual.cjs` | **PASS** |
+|`npm audit --omit=dev` | **PASS: 0 vulnerabilidades de dependencias de producción** |
 | `git diff --check` | **PASS** |
 | QA público: 10 rutas GitHub Pages + Inicio Vercel en 11 viewports | **121 combinaciones ejecutadas**; 5 alertas (ver arriba) |
 
@@ -98,7 +98,11 @@ Se verificó el ciclo funcional de RAF del Canvas/cursor (activo bajo condicione
 - **Git local:** rama `fix/pazbel-ux-polish-20261117`, basada en `origin/main` SHA `1b9c474771e08cce85095b80120ee31b554925e5`.
 - **GitHub Pages:** [sitio público](https://elias040720.github.io/PazBel-Studios/#/). QA confirma que aún es la versión anterior. **No se declara el deploy nuevo.**
 - **Vercel:** [sitio público](https://paz-bel-studios.vercel.app/). Contenido distinto al repo; proyecto/permiso correcto **BLOCKED** en las cuentas conectadas. No se cambió la configuración.
-- **Commit de código:** `7764301d3c6605a5106666dfdb789d1c2162d80e`, rama publicada `fix/pazbel-ux-polish-20261117`.\n- **PR:** [#2](https://github.com/Elias040720/PazBel-Studios/pull/2), abierta contra `main`.\n- **CI de GitHub:** [ejecución 44208450490](https://github.com/Elias040720/PazBel-Studios/actions/runs/44208450490), **PASS**; el job completo, incluidas pruebas de navegador, terminó con éxito.\n- **Vercel Preview:** **FAIL/BLOCKED** para despliegue `HQb3NgQBJd24FCGjg1R3DYvSJTj3`. La lectura de logs devuelve 403 para equipo `elias-6ce0`; los dos perfiles Vercel conectados no reconocen el equipo al intentar autorizar acceso. Causa del fallo de build no confirmada.\n- **Merge a main y publicación de Pages:** pendientes hasta resolver el fallo de Vercel Preview y validar el despliegue. No se ignoró el estado fallido ni se hizo force push/deploy manual.
+- **Commit de código:** `7764301d3c6605a5106666dfdb789d1c2162d80e`, rama publicada `fix/pazbel-ux-polish-20261117`.
+- **PR:** [#2](https://github.com/Elias040720/PazBel-Studios/pull/2), abierta contra `main`.
+- **CI de GitHub:** [ejecución 44208450490](https://github.com/Elias040720/PazBel-Studios/actions/runs/44208450490), **PASS**; el job completo, incluidas pruebas de navegador, terminó con éxito.
+- **Vercel Preview:** **FAIL/BLOCKED** para despliegue `HQb3NgQBJd24FCGjg1R3DYvSJTj3`. La lectura de logs devuelve 403 para equipo `elias-6ce0`; los dos perfiles Vercel conectados no reconocen el equipo al intentar autorizar acceso. Causa del fallo de build no confirmada.
+- **Merge a main y publicación de Pages:** pendientes hasta resolver el fallo de Vercel Preview y validar el despliegue. No se ignoró el estado fallido ni se hizo force push/deploy manual.
 
 ## Pendientes reales
 
