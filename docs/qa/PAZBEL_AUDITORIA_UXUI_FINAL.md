@@ -98,7 +98,7 @@ Se verificó el ciclo funcional de RAF del Canvas/cursor (activo bajo condicione
 - **Git local:** rama `fix/pazbel-ux-polish-20261117`, basada en `origin/main` SHA `1b9c474771e08cce85095b80120ee31b554925e5`.
 - **GitHub Pages:** [sitio público](https://elias040720.github.io/PazBel-Studios/#/). QA confirma que aún es la versión anterior. **No se declara el deploy nuevo.**
 - **Vercel:** [sitio público](https://paz-bel-studios.vercel.app/). Contenido distinto al repo; proyecto/permiso correcto **BLOCKED** en las cuentas conectadas. No se cambió la configuración.
-- **Commit, push, PR, merge y SHA publicado:** pendientes de completar tras este reporte y una nueva validación remota. No se hizo force push ni deploy manual.
+- **Commit de código:** `7764301d3c6605a5106666dfdb789d1c2162d80e`, rama publicada `fix/pazbel-ux-polish-20261117`.\n- **PR:** [#2](https://github.com/Elias040720/PazBel-Studios/pull/2), abierta contra `main`.\n- **CI de GitHub:** [ejecución 44208450490](https://github.com/Elias040720/PazBel-Studios/actions/runs/44208450490), **PASS**; el job completo, incluidas pruebas de navegador, terminó con éxito.\n- **Vercel Preview:** **FAIL/BLOCKED** para despliegue `HQb3NgQBJd24FCGjg1R3DYvSJTj3`. La lectura de logs devuelve 403 para equipo `elias-6ce0`; los dos perfiles Vercel conectados no reconocen el equipo al intentar autorizar acceso. Causa del fallo de build no confirmada.\n- **Merge a main y publicación de Pages:** pendientes hasta resolver el fallo de Vercel Preview y validar el despliegue. No se ignoró el estado fallido ni se hizo force push/deploy manual.
 
 ## Pendientes reales
 
@@ -108,3 +108,9 @@ Se verificó el ciclo funcional de RAF del Canvas/cursor (activo bajo condicione
 4. Medir Core Web Vitals de laboratorio/campo y hacer prueba física/zoom 200 % si se requiere declaración completa de accesibilidad/rendimiento.
 
 **No hay PASS global de publicaciones:** el código local está validado, pero GitHub Pages sigue antiguo y Vercel no está bajo el proyecto conectado disponible.
+
+## Actualización tras la validación remota
+
+El commit `7764301d3c6605a5106666dfdb789d1c2162d80e` fue enviado a la rama de trabajo y la PR #2 quedó abierta. GitHub Actions completó el job de calidad con **PASS**, incluyendo pruebas funcionales, responsive y de accesibilidad automatizada. El chequeo de Vercel asociado a la PR terminó **FAIL**. Aunque la integración identifica el proyecto `paz-bel-studios` dentro del equipo `elias-6ce0`, la conexión Vercel disponible recibe 403 al leer eventos y no puede autorizar ese equipo porque no aparece en ninguno de sus perfiles conectados. Por tanto, no hay logs suficientes para atribuir la causa al código ni al entorno.
+
+No se integró la PR ni se actualizó GitHub Pages porque la misión requiere verificar el resultado de publicación y el chequeo conectado de Vercel está fallido. El deploy actual de Pages sigue reflejando el código previo. Para continuar con la misma misión, la identidad Vercel conectada necesita acceso al equipo que posee `paz-bel-studios`; después se podrán leer los logs, corregir la causa si corresponde, repetir el preview y, con todas las verificaciones satisfactorias, integrar y confirmar Pages.
