@@ -53,7 +53,7 @@
 </header>
 
 <!-- Menú móvil -->
-<div class="menu" id="menu" aria-hidden="true">
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menú principal" aria-hidden="true">
   <nav class="menu__list" aria-label="Menú móvil">
     <a href="#/" tabindex="-1" style="transition-delay:.06s"><span>01</span>Inicio</a>
     <a href="#/proyectos" tabindex="-1" style="transition-delay:.11s"><span>02</span>Proyectos</a>
@@ -71,7 +71,7 @@
 </div>
 
 <!-- ===================== MAIN ===================== -->
-<main id="main">
+<main id="main" tabindex="-1">
 
 <!-- ============================================================
      VIEW: HOME
@@ -229,32 +229,32 @@
       </div>
 
       <div class="disc">
-        <a href="#/servicios" class="disc__row" data-reveal>
+        <a href="#/servicios/diseno-web" class="disc__row" data-reveal>
           <span class="disc__n">01</span>
           <span class="disc__t">Diseño web</span>
           <span class="disc__d">Dirección de arte, sistemas de diseño e interfaces que se sienten inevitables.</span>
         </a>
-        <a href="#/servicios" class="disc__row" data-reveal style="--d:.06s">
+        <a href="#/servicios/desarrollo-web" class="disc__row" data-reveal style="--d:.06s">
           <span class="disc__n">02</span>
           <span class="disc__t">Desarrollo</span>
           <span class="disc__d">Corporativos, e-commerce y plataformas. Código limpio, rápido, mantenible.</span>
         </a>
-        <a href="#/servicios" class="disc__row" data-reveal style="--d:.12s">
+        <a href="#/servicios/software" class="disc__row" data-reveal style="--d:.12s">
           <span class="disc__n">03</span>
           <span class="disc__t">Software a medida</span>
           <span class="disc__d">Herramientas que resuelven lo que ninguna plantilla resuelve.</span>
         </a>
-        <a href="#/servicios" class="disc__row" data-reveal style="--d:.18s">
+        <a href="#/servicios/automatizacion" class="disc__row" data-reveal style="--d:.18s">
           <span class="disc__n">04</span>
           <span class="disc__t">Automatización</span>
           <span class="disc__d">Menos fricción, menos errores, más tiempo para lo importante.</span>
         </a>
-        <a href="#/servicios" class="disc__row" data-reveal style="--d:.24s">
+        <a href="#/servicios/motion" class="disc__row" data-reveal style="--d:.24s">
           <span class="disc__n">05</span>
           <span class="disc__t">Experiencias digitales</span>
           <span class="disc__d">Motion, interacción y profundidad. Cuando el asombro es parte de la estrategia.</span>
         </a>
-        <a href="#/servicios" class="disc__row" data-reveal style="--d:.30s">
+        <a href="#/servicios/motion" class="disc__row" data-reveal style="--d:.30s">
           <span class="disc__n">06</span>
           <span class="disc__t">Crecimiento digital</span>
           <span class="disc__d">Marketing, contenido y datos al servicio del diseño.</span>
@@ -441,7 +441,7 @@
       <div><dt>Rol</dt><dd id="pdRole">—</dd></div>
       <div><dt>Referencia</dt><dd id="pdYear2">—</dd></div>
       <div><dt>Categoría</dt><dd id="pdCat2">—</dd></div>
-      <div><dt>Stack</dt><dd id="pdStackTop">—</dd></div>
+      <div id="pdStackMeta"><dt>Stack</dt><dd id="pdStackTop">—</dd></div>
     </dl>
   </div>
 
@@ -450,7 +450,7 @@
       <div>
         <h3>Contexto</h3>
         <p id="pdContext" data-reveal>—</p>
-        <h3 style="margin-top:34px">El reto</h3>
+        <h3 id="pdChallengeHeading" style="margin-top:34px">El reto</h3>
         <p id="pdChallenge" data-reveal>—</p>
       </div>
       <div>
@@ -470,7 +470,7 @@
     </figure>
 
     <div class="pd-body" style="margin-top:clamp(40px,7vw,80px)">
-      <div>
+      <div id="pdTechBlock">
         <h3>Tecnologías</h3>
         <ul class="tags" id="pdStack"></ul>
       </div>
@@ -478,7 +478,7 @@
         <h3>Características clave</h3>
         <ul class="tags" id="pdStack2" style="gap:8px"></ul>
         <p class="disclaimer" style="margin-top:26px">
-          Ficha informativa de portafolio. No se atribuye automáticamente cada trabajo al estudio y no se presentan resultados no verificados.
+          Ficha informativa de portafolio. Autoría, tecnologías, alcance final y resultados se indican solo cuando están verificados.
         </p>
       </div>
     </div>
@@ -653,7 +653,7 @@
      VIEW: DETALLE DE SERVICIO
      ============================================================ -->
 <section class="view" data-view="servicio" id="view-servicio" hidden>
-<header class="page-head container"><a href="#/servicios" class="eyebrow" style="display:inline-block;margin-bottom:22px">↖ Todos los servicios</a><span class="eyebrow" id="srvIndex">01 — Capacidad</span><h1 class="page-head__title" id="srvTitle">Servicio</h1><div class="page-head__row"><p class="lede" id="srvLead"></p></div></header>
+<header class="page-head container"><div class="service-detail__meta"><a href="#/servicios" class="eyebrow">↖ Todos los servicios</a><span class="eyebrow" id="srvIndex">01 — Capacidad</span></div><h1 class="page-head__title" id="srvTitle">Servicio</h1><div class="page-head__row"><p class="lede" id="srvLead"></p></div></header>
 <div class="container service-detail"><div class="service-detail__side"><div class="service-detail__orb" aria-hidden="true"><div></div><span id="srvSymbol">PB/01</span></div><p class="eyebrow">Diseño con intención. Tecnología con criterio.</p></div><div class="service-detail__body">
 <span class="sec-num">El enfoque</span><h2 class="display display--lg" id="srvStatement">Diseño con intención, ejecución con criterio.</h2><p class="body-copy" id="srvBody"></p>
 <div class="rule" style="margin:42px 0"></div><span class="sec-num">Lo que puede incluir</span><ul class="service-detail__deliver" id="srvBullets"></ul>
