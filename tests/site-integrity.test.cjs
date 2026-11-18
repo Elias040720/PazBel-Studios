@@ -58,10 +58,26 @@ test('Home pairs every confirmed project page with its public website', () => {
   }
 });
 
+test('Home disciplines point to matching service details', () => {
+  const links = [...html.matchAll(/<a href="(#\/servicios\/[^"]+)" class="disc__row"/g)].map(match => match[1]);
+  assert.deepEqual(links, [
+    '#/servicios/diseno-web', '#/servicios/desarrollo-web', '#/servicios/software',
+    '#/servicios/automatizacion', '#/servicios/motion', '#/servicios/motion'
+  ]);
+});
+
 test('scroll reveal content is visible even when IntersectionObserver never fires', () => {
   const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(app, /typeof window\.IntersectionObserver === 'function'/);
   assert.match(css, /\[data-reveal\],\[data-reveal="clip"\],\[data-reveal="scale"\]\{opacity:1;transform:none;clip-path:none\}/);
   assert.match(css, /\.mask>span,\.w>span\{transform:none\}/);
+  assert.match(css, /\.no-motion \.hero__sub/);
+  assert.doesNotMatch(css, /\.no-motion \.no-motion \.hero__sub/);
+});
+
+test('keyboard skip link has a programmatically focusable main landmark', () => {
+  assert.match(html, /<main\b[^>]*id="main"[^>]*tabindex="-1"/i);
+  assert.match(app, /target\.focus\(\{preventScroll:true\}\)/);
 });
 
 test('HTML has unique IDs, working local anchors, and all core app assets', () => {

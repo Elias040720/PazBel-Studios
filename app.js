@@ -236,7 +236,7 @@
         "role": "Proyecto de integrante / referencia",
         "context": "Web pública presentada en el portafolio como Gimnasio Lima; figura en el listado de PazBel como Gimnasio Murex. Confirmar denominación comercial antes de publicar.",
         "challenge": "Comprender la necesidad del usuario y definir un flujo digital claro, acorde al alcance de este proyecto.",
-        "solution": "Sistema de gestión de membresías, reservas y asistencia.",
+        "solution": "El alcance funcional de esta referencia no está confirmado.",
         "solution2": "La dirección revisada muestra un sitio llamado Gimnasio Lima; su relación con Murex no está confirmada. Esta portada es conceptual.",
         "features": [
             "Fitness · Membresías",
@@ -770,7 +770,7 @@
      CURSOR PERSONALIZADO
      ============================================================ */
   (function cursor(){
-    if (window.matchMedia('(hover: none)').matches) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     const c = $('.cursor');
     const dot = $('.cursor__dot');
     const ring = $('.cursor__ring');
@@ -780,24 +780,43 @@
     let rx = mx, ry = my;
     let dx = mx, dy = my;
     let raf = null;
+    const canAnimate = () => !document.hidden && !reduced && motionOn;
+
+    function stop(){
+      if (raf){ cancelAnimationFrame(raf); raf = null; }
+      body.classList.remove('has-cursor');
+    }
 
     function loop(){
+      if (!canAnimate()) { stop(); return; }
       rx = lerp(rx, mx, 0.16);
       ry = lerp(ry, my, 0.16);
       dx = lerp(dx, mx, 0.42);
       dy = lerp(dy, my, 0.42);
       ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
       dot.style.transform  = `translate(${dx}px, ${dy}px) translate(-50%,-50%)`;
+      if (Math.max(Math.abs(rx-mx),Math.abs(ry-my),Math.abs(dx-mx),Math.abs(dy-my)) < 0.2){
+        rx=dx=mx; ry=dy=my;
+        ring.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+        dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+        raf=null; return;
+      }
       raf = requestAnimationFrame(loop);
     }
 
     window.addEventListener('mousemove', e => {
-      if (!body.classList.contains('has-cursor')) {
-        body.classList.add('has-cursor');
-        loop();
-      }
+      if (!canAnimate()) return;
+      body.classList.add('has-cursor');
+      if (!raf) raf = requestAnimationFrame(loop);
       mx = e.clientX; my = e.clientY;
     }, {passive:true});
+
+    const sync = () => { if (!canAnimate()) stop(); };
+    window.__stopCustomCursor = stop;
+    document.addEventListener('visibilitychange', sync);
+    window.addEventListener('pagehide', stop);
+    window.addEventListener('pageshow', sync);
+    reduceMQ.addEventListener('change', sync);
 
     document.addEventListener('mouseover', e => {
       const t = e.target.closest('a, button, .chip, input, textarea, select, label, [data-cursor]');
@@ -859,14 +878,17 @@
   /* ============================================================
      OBSERVER DE REVELADOS
      ============================================================ */
-  const revealIO = new IntersectionObserver(entries => {
+  const revealIO = typeof window.IntersectionObserver === 'function' ? new window.IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting){
         e.target.classList.add('is-in');
         revealIO.unobserve(e.target);
       }
     });
-  }, { threshold: 0.01, rootMargin: '80px 0px 60px 0px' });
+  }, { threshold: 0.01, rootMargin: '80px 0px 60px 0px' }) : {
+    observe(el){ el.classList.add('is-in'); },
+    unobserve(){},
+  };
 
   function observeReveals(root){
     $$('[data-reveal], .mask, [data-split]', root || document).forEach(el => {
@@ -922,7 +944,7 @@
     let w = 0, h = 0, dpr = 1;
     let particles = [];
     let raf = null;
-    let visible = false;
+    let visible = typeof window.IntersectionObserver !== 'function';
     let t = 0;
     const mouse = { x: -9999, y: -9999, active: false };
     const PALETTE = ['95,227,214','91,140,255','162,119,255','255,95,162','255,122,92'];
@@ -1018,20 +1040,29 @@
     }
 
     function start(){
-      if (raf || reduced || !motionOn) return;
+      if (raf || !visible || document.hidden || reduced || !motionOn || canvas.closest('[hidden]')) return;
       raf = requestAnimationFrame(frame);
     }
     function stop(){
       if (raf){ cancelAnimationFrame(raf); raf = null; }
     }
 
-    const io = new IntersectionObserver(entries => {
+    const io = typeof window.IntersectionObserver === 'function' ? new window.IntersectionObserver(entries => {
       entries.forEach(e => {
         visible = e.isIntersecting;
-        if (visible) start(); else stop();
+        refresh();
       });
-    }, { threshold: 0 });
-    io.observe(canvas);
+    }, { threshold: 0 }) : null;
+    if (io) io.observe(canvas);
+
+    function refresh(){
+      const rect=canvas.getBoundingClientRect();
+      const canRender=visible && !document.hidden && !reduced && motionOn && !canvas.closest('[hidden]') && rect.width>0 && rect.height>0;
+      if (canRender){
+        if (Math.abs(rect.width-w)>1 || Math.abs(rect.height-h)>1) size();
+        start();
+      } else stop();
+    }
 
     canvas.addEventListener('mousemove', e => {
       const r = canvas.getBoundingClientRect();
@@ -1044,18 +1075,17 @@
     let rTimer;
     window.addEventListener('resize', () => {
       clearTimeout(rTimer);
-      rTimer = setTimeout(() => { size(); }, 180);
+      rTimer = setTimeout(() => { size(); refresh(); }, 180);
     });
 
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stop();
-      else if (visible) start();
+      refresh();
     });
 
     size();
-    if (!reduced && motionOn) start();
+    refresh();
 
-    return { start, stop, size };
+    return { start, stop, size, refresh };
   }
 
   function initFields(){
@@ -1144,7 +1174,17 @@
     });
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+      if (!menu.classList.contains('open')) return;
+      if (e.key === 'Escape') { closeMenu(); return; }
+      if (e.key !== 'Tab') return;
+      const links = menuLinks.filter(link => !link.hidden);
+      const first = links[0], last = links[links.length - 1];
+      if (!first || !last) return;
+      if (e.shiftKey && (document.activeElement === first || !menu.contains(document.activeElement))){
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && (document.activeElement === last || !menu.contains(document.activeElement))){
+        e.preventDefault(); first.focus();
+      }
     });
 
     window.__closeMenu = closeMenu;
@@ -1186,11 +1226,15 @@
 
     const parts = path.split('/');
     if (parts[0] === 'proyectos'){
-      if (parts[1]) return { view:'proyecto', param: parts[1] };
+      if (parts[1]) return PROJECTS.some(project => project.slug === parts[1])
+        ? { view:'proyecto', param: parts[1] }
+        : { view:'proyectos', param:null };
       return { view:'proyectos', param:null };
     }
     if (parts[0] === 'servicios'){
-      if (parts[1]) return {view:'servicio',param:parts[1]};
+      if (parts[1]) return SERVICES.some(service => service.slug === parts[1])
+        ? {view:'servicio',param:parts[1]}
+        : {view:'servicios',param:null};
       return { view:'servicios', param:null };
     }
     if (VIEWS[parts[0]]) return { view: parts[0], param:null };
@@ -1208,10 +1252,10 @@
   }
 
   function updateNavState(route){
+    const section = route.view === 'proyecto' ? 'proyectos' : route.view === 'servicio' ? 'servicios' : route.view;
     $$('.nav__links a').forEach(a => {
       const h = a.getAttribute('href').replace('#/','');
-      const active = (route.view === 'home' && h === '') ||
-                     (h !== '' && route.view.indexOf(h) === 0 && h !== '#');
+      const active = (section === 'home' && h === '') || (h !== '' && h === section);
       if (active) a.setAttribute('aria-current','page');
       else a.removeAttribute('aria-current');
     });
@@ -1242,6 +1286,8 @@
 
     updateNavState(route);
     document.title = titleFor(route);
+    fields.forEach(field => field.refresh());
+    if (window.__updateProcess) requestAnimationFrame(window.__updateProcess);
   }
 
   function titleFor(route){
@@ -1317,6 +1363,8 @@
         const target = document.getElementById(id);
         if (target){
           e.preventDefault();
+          if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex','-1');
+          try { target.focus({preventScroll:true}); } catch (error) { target.focus(); }
           target.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block:'start'});
         }
         return;
@@ -1535,7 +1583,9 @@
     $('#pdRole').textContent = p.role;
     $('#pdYear2').textContent = p.year;
     $('#pdCat2').textContent = CAT_LABEL[p.cat] || p.cat;
-    $('#pdStackTop').textContent = p.stack.slice(0,3).join(' · ');
+    const verifiedStack=p.stack.filter(item=>!/(?:por verificar|por documentar|por confirmar)/i.test(item));
+    $('#pdStackTop').textContent = verifiedStack.slice(0,3).join(' · ');
+    $('#pdStackMeta').hidden = verifiedStack.length === 0;
 
     const cover = $('#pdCover');
     cover.className = 'art art--photo';
@@ -1551,13 +1601,26 @@
     $('#pdChallenge').textContent = p.challenge;
     $('#pdSolution').textContent = p.solution;
     $('#pdSolution2').textContent = p.solution2;
+    const genericChallenges = [
+      'Comprender la necesidad del usuario y definir un flujo digital claro, acorde al alcance de este proyecto.',
+      'Se documenta como referencia del archivo de proyectos; el reto y el alcance originales están pendientes de confirmar.'
+    ];
+    const challengeDocumented = Boolean(p.challenge && !genericChallenges.includes(p.challenge));
+    $('#pdChallengeHeading').hidden = !challengeDocumented;
+    $('#pdChallenge').hidden = !challengeDocumented;
+    $('#pdSolution').hidden = !p.solution || p.solution.trim() === p.context.trim();
 
-    $('#pdFeatures').innerHTML = p.features.map((f, i) =>
-      `<div class="pd-feature"><span>0${i+1}</span><p>${f}</p></div>`
+    const verifiedFeatures=p.features.filter(feature=>!/(?:diseño orientado a la experiencia|alcance detallado sujeto a verificación|experiencia o flujo por documentar|resultados y atribución sujetos a verificación)/i.test(feature));
+    $('#pdFeatures').innerHTML = verifiedFeatures.map((feature, i) =>
+      `<div class="pd-feature"><span>0${i+1}</span><p>${escapeHTML(feature)}</p></div>`
     ).join('');
+    $('#pdFeatures').hidden = verifiedFeatures.length === 0;
+    $('#pdFeatures').classList.toggle('pd-features--single', verifiedFeatures.length === 1);
 
-    $('#pdStack').innerHTML = p.stack.map(s => `<li>${s}</li>`).join('');
-    $('#pdStack2').innerHTML = p.features.map(s => `<li>${s}</li>`).join('');
+    $('#pdStack').innerHTML = verifiedStack.map(s => `<li>${escapeHTML(s)}</li>`).join('');
+    $('#pdTechBlock').hidden = verifiedStack.length === 0;
+    $('#pdStack2').innerHTML = verifiedFeatures.map(s => `<li>${escapeHTML(s)}</li>`).join('');
+    $('#pdStack2').hidden = verifiedFeatures.length === 0;
 
     const art2 = $('#pdArt2');
     art2.className = 'art art--photo';
@@ -1624,22 +1687,39 @@
     const labels = ['Diseño','Desarrollo','Impulso','Evolución'];
     const colors = ['#5FE3D6','#5B8CFF','#A277FF','#FF5FA2'];
 
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const phase = parseInt(e.target.dataset.phase, 10) || 0;
-        steps.forEach(s => s.classList.remove('active'));
-        e.target.classList.add('active');
-        if (numEl) numEl.textContent = '0' + (phase + 1);
-        if (labelEl) labelEl.textContent = labels[phase] || '';
-        if (ring){
-          ring.style.borderColor = colors[phase] + '66';
-          ring.style.transform = 'scale(' + (1 + phase * 0.06) + ')';
-        }
-      });
-    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    function activate(step){
+      if (!step) return;
+      const phase = clamp(parseInt(step.dataset.phase, 10) || 0, 0, labels.length - 1);
+      steps.forEach(item => item.classList.toggle('active', item === step));
+      if (numEl) numEl.textContent = '0' + (phase + 1);
+      if (labelEl) labelEl.textContent = labels[phase] || '';
+      if (ring){
+        ring.style.borderColor = colors[phase] + '66';
+        ring.style.transform = 'scale(' + (1 + phase * 0.06) + ')';
+      }
+    }
 
-    steps.forEach(s => io.observe(s));
+    if (typeof window.IntersectionObserver === 'function'){
+      const io = new window.IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) activate(e.target); });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      steps.forEach(s => io.observe(s));
+    } else {
+      const updateFromScroll = () => {
+        const view = $('#view-proceso');
+        if (view?.hidden) return;
+        const midpoint = window.innerHeight / 2;
+        const step = steps.reduce((best, item) => {
+          const rect = item.getBoundingClientRect();
+          return Math.abs(rect.top + rect.height / 2 - midpoint) < Math.abs(best.getBoundingClientRect().top + best.getBoundingClientRect().height / 2 - midpoint) ? item : best;
+        }, steps[0]);
+        activate(step);
+      };
+      window.addEventListener('scroll', updateFromScroll, {passive:true});
+      window.addEventListener('resize', updateFromScroll, {passive:true});
+      window.__updateProcess = updateFromScroll;
+      activate(steps[0]);
+    }
   }
 
   /* ============================================================
@@ -1796,9 +1876,10 @@
       motionBtn.classList.toggle('on', motionOn);
 
       if (motionOn){
-        fields.forEach(f => f.start());
+        fields.forEach(f => f.refresh());
       } else {
         fields.forEach(f => f.stop());
+        if (window.__stopCustomCursor) window.__stopCustomCursor();
       }
     });
   }
@@ -1834,8 +1915,8 @@
     // Pausar canvas si se reduce el movimiento del sistema
     reduceMQ.addEventListener('change', e => {
       reduced = e.matches;
-      if (reduced){ fields.forEach(f => f.stop()); }
-      else if (motionOn){ fields.forEach(f => f.start()); }
+      fields.forEach(f => f.refresh());
+      if (reduced && window.__stopCustomCursor) window.__stopCustomCursor();
     });
   }
 

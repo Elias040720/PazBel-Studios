@@ -7,6 +7,7 @@ coverage/
 playwright-report/
 test-results/
 .gitnexus/
+qa-pazbel-evidencias/
 
 # Local configuration and credentials
 .env

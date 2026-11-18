@@ -56,6 +56,9 @@ test('all portfolio controls work and every project detail route renders', async
     await detail.locator('#pdName').waitFor();
     assert.ok((await detail.locator('#pdName').innerText()).trim().length > 0, route);
     assert.equal(await detail.locator('#view-proyecto').isVisible(), true, route);
+    assert.equal(await detail.locator('#pdChallenge').isHidden(), true, `${route} does not present an unverified generic challenge`);
+    assert.equal(await detail.locator('#pdStackMeta').isHidden(), true, `${route} hides unverified technologies from metadata`);
+    assert.equal(await detail.locator('#pdTechBlock').isHidden(), true, `${route} hides unverified technology list`);
     await detail.close();
   }
   assert.deepEqual(errors, []);
@@ -220,10 +223,145 @@ test('mobile menu supports Escape, backdrop close, and restores focus', async ()
   assert.equal(await burger.getAttribute('aria-expanded'), 'false');
   assert.equal(await page.evaluate(() => document.activeElement?.id), 'burger');
   await burger.click();
+  const menuLinks = page.locator('#menu .menu__list a');
+  await menuLinks.last().focus();
+  await page.keyboard.press('Tab');
+  assert.equal(await page.evaluate(() => document.activeElement?.getAttribute('href')), '#/', 'Tab wraps to first menu link');
+  await page.keyboard.press('Shift+Tab');
+  assert.equal(await page.evaluate(() => document.activeElement?.getAttribute('href')), await menuLinks.last().getAttribute('href'), 'Shift+Tab wraps to last menu link');
   await page.locator('#menu').click({ position: { x: 8, y: 400 } });
   assert.equal(await burger.getAttribute('aria-expanded'), 'false');
   await page.close();
   assert.deepEqual(errors, []);
+});
+
+test('six Home disciplines open their matching service and keep the parent navigation current', async () => {
+  const expected = ['diseno-web', 'desarrollo-web', 'software', 'automatizacion', 'motion', 'motion'];
+  const { page, errors } = await open('#/');
+  const links = page.locator('.disc__row');
+  assert.equal(await links.count(), expected.length);
+  assert.deepEqual(await links.evaluateAll(items => items.map(item => item.getAttribute('href'))), expected.map(slug => `#/servicios/${slug}`));
+  for (const slug of [...new Set(expected)]) {
+    await page.goto(`${entry}#/servicios/${slug}`);
+    await page.locator('#view-servicio').waitFor({ state: 'visible' });
+    assert.ok((await page.locator('#srvTitle').innerText()).trim().length > 0, slug);
+    const meta = await page.evaluate(() => {
+      const back = document.querySelector('.service-detail__meta a').getBoundingClientRect();
+      const index = document.querySelector('#srvIndex').getBoundingClientRect();
+      return { gapX: index.left - back.right, gapY: index.top - back.bottom };
+    });
+    assert.ok(meta.gapX >= 10 || meta.gapY >= 8, `${slug} service breadcrumb and index have spacing: ${JSON.stringify(meta)}`);
+    assert.equal(await page.locator('.nav__links a[href="#/servicios"]').getAttribute('aria-current'), 'page', `${slug} marks Servicios current`);
+  }
+  await page.goto(`${entry}#/servicios/no-existe`);
+  await page.locator('#view-servicios').waitFor({ state: 'visible' });
+  assert.equal(await page.title(), 'Servicios — PazBel Studios');
+  await page.goto(`${entry}#/proyectos/no-existe`);
+  await page.locator('#view-proyectos').waitFor({ state: 'visible' });
+  assert.equal(await page.title(), 'Proyectos — PazBel Studios');
+  assert.deepEqual(errors, []);
+  await page.close();
+});
+
+test('the full app remains interactive without IntersectionObserver', async () => {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+  page.setDefaultTimeout(6000);
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.addInitScript(() => { window.IntersectionObserver = undefined; });
+  await page.goto(entry);
+  assert.equal(await page.locator('#view-home').isVisible(), true);
+  assert.equal(await page.locator('.hero__sub').isVisible(), true);
+  await page.locator('#burger').click();
+  assert.equal(await page.locator('#burger').getAttribute('aria-expanded'), 'true');
+  await page.keyboard.press('Escape');
+  await page.locator('.hero__cta a[href="#/proyectos"]').click();
+  await page.waitForFunction(() => location.hash === '#/proyectos');
+  await page.locator('#view-proyectos').waitFor({ state: 'visible' });
+  await page.locator('#projectSearch').fill('mova');
+  await page.waitForTimeout(180);
+  assert.match(await page.locator('#projectSummary').innerText(), /1 de 1 proyecto|1 proyecto encontrado/i);
+  await page.goto(`${entry}#/proceso`);
+  await page.locator('#view-proceso').waitFor({ state: 'visible' });
+  assert.equal(await page.locator('#procNum').innerText(), '01');
+  assert.deepEqual(errors, []);
+  await page.close();
+});
+
+test('normal motion runs only while its canvas view is active and pauses custom cursor when hidden', async () => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: 'no-preference' });
+  page.setDefaultTimeout(6000);
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.addInitScript(() => {
+    window.__rafCount = 0;
+    window.__canvasStrokes = 0;
+    const original = window.requestAnimationFrame.bind(window);
+    window.requestAnimationFrame = callback => { window.__rafCount++; return original(callback); };
+    const originalStroke = CanvasRenderingContext2D.prototype.stroke;
+    CanvasRenderingContext2D.prototype.stroke = function(...args) { window.__canvasStrokes++; return originalStroke.apply(this, args); };
+  });
+  await page.goto(entry);
+  await page.locator('#view-home').waitFor({ state: 'visible' });
+  await page.waitForTimeout(220);
+  const homeFrames = await page.evaluate(() => window.__rafCount);
+  const homeStrokes = await page.evaluate(() => window.__canvasStrokes);
+  assert.ok(homeFrames > 0 && homeStrokes > 0, 'hero canvas draws frames with normal motion');
+  await page.goto(`${entry}#/proyectos`);
+  await page.locator('#view-proyectos').waitFor({ state: 'visible' });
+  await page.waitForTimeout(160);
+  const firstIdleCount = await page.evaluate(() => window.__rafCount);
+  const firstIdleStrokeCount = await page.evaluate(() => window.__canvasStrokes);
+  await page.waitForTimeout(120);
+  const secondIdleCount = await page.evaluate(() => window.__rafCount);
+  const secondIdleStrokeCount = await page.evaluate(() => window.__canvasStrokes);
+  assert.equal(secondIdleCount, firstIdleCount, 'all animation frames stop after leaving Home');
+  assert.equal(secondIdleStrokeCount, firstIdleStrokeCount, 'canvas stops drawing after leaving Home');
+  await page.mouse.move(900, 500);
+  assert.equal(await page.locator('body').evaluate(el => el.classList.contains('has-cursor')), true);
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'hidden', { configurable: true, value: true });
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  assert.equal(await page.locator('body').evaluate(el => el.classList.contains('has-cursor')), false);
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'hidden', { configurable: true, value: false });
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await page.mouse.move(901, 501);
+  assert.equal(await page.locator('body').evaluate(el => el.classList.contains('has-cursor')), true, 'cursor resumes after tab becomes visible');
+  assert.deepEqual(errors, []);
+  await page.close();
+});
+
+test('skip link transfers keyboard focus to main content', async () => {
+  const { page, errors } = await open('#/');
+  await page.locator('.skip').focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await page.evaluate(() => document.activeElement?.id), 'main');
+  assert.equal(await page.locator('#main').getAttribute('tabindex'), '-1');
+  assert.deepEqual(errors, []);
+  await page.close();
+});
+
+test('manual no-motion switch keeps the approved hero text visible', async () => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 960 }, reducedMotion: 'no-preference' });
+  page.setDefaultTimeout(6000);
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto(entry.replace(/\.html$/, '.html?demo=1'));
+  await page.locator('#hero').evaluate(hero => hero.classList.remove('ready'));
+  await page.locator('#demoToggle').click();
+  await page.locator('#dMotion').click();
+  assert.equal(await page.evaluate(() => document.documentElement.classList.contains('no-motion')), true);
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('.hero__sub')).opacity === '1');
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('.hero__cta')).opacity === '1');
+  assert.equal(await page.locator('.hero__sub').evaluate(el => getComputedStyle(el).opacity), '1');
+  assert.equal(await page.locator('.hero__cta').evaluate(el => getComputedStyle(el).opacity), '1');
+  await page.locator('#dMotion').click();
+  assert.equal(await page.evaluate(() => document.documentElement.classList.contains('no-motion')), false);
+  assert.deepEqual(errors, []);
+  await page.close();
 });
 
 test('responsive layouts fit target widths and primary views have no axe findings', async () => {
